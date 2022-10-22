@@ -1,14 +1,9 @@
-import CategoryExplanation from "../../features/Category/CategoryExplanation";
-import Layout from "../../components/Layout";
-import CategoryImgWrap from "../../features/Category/CategoryImgWrap";
+import React from "react";
 
-const Category = () => {
+const Category = ({}) => {
 	return (
 		<>
-			<Layout>
-				<CategoryExplanation />
-				<CategoryImgWrap />
-			</Layout>
+			<div>Category</div>
 		</>
 	);
 };
