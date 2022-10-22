@@ -7,7 +7,10 @@ const Header = () => {
   return (
     <>
       <HeaderWrap>
-        <img src={logo} alt="logo" />
+        <Link to={'/'}>
+          <img src={logo} alt="logo" />
+        </Link>
+
         <div>
           <StLink to={'my_page'}>마이 페이지</StLink>
           <StLink to={'login'}>로그인</StLink>
