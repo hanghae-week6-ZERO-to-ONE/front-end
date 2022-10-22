@@ -12,6 +12,7 @@ const Header = () => {
 				</Link>
 
 				<div>
+					너 최신 버젼해라
 					<StLink to={"my_page"}>마이 페이지</StLink>
 					<StLink to={"login"}>로그인</StLink>
 				</div>
@@ -49,5 +50,8 @@ const StLink = styled(Link)`
 	}
 	:hover::after {
 		width: 50%;
+	}
+	:last-child {
+		margin-right: 0;
 	}
 `;
