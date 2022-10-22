@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/Header";
 import LoginPage from "../pages/login/LoginPage";
 import MyPage from "../pages/my_page/MyPage";
@@ -14,7 +14,7 @@ const Router = () => {
 			<Routes>
 				<Route path="/" element={<Header></Header>}>
 					<Route path="" element={<Home />} />
-					<Route path="category" element={<Category />} />
+					<Route path="category/:id" element={<Category />} />
 					<Route path="detail" element={<Detail />}>
 						<Route path=":id" element={<Detail />} />
 					</Route>

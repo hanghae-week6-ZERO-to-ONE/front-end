@@ -50,4 +50,7 @@ const StLink = styled(Link)`
 	:hover::after {
 		width: 50%;
 	}
+	:last-child {
+		margin-right: 0;
+	}
 `;
