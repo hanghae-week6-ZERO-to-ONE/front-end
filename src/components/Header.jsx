@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+>>>>>>> seokwon
 import { Outlet } from "react-router-dom";
 import logo from "../images/logo.png";
 import styled from "styled-components";
@@ -12,7 +15,10 @@ const Header = () => {
 				</Link>
 
 				<div>
+<<<<<<< HEAD
 					너 최신 버젼해라
+=======
+>>>>>>> seokwon
 					<StLink to={"my_page"}>마이 페이지</StLink>
 					<StLink to={"login"}>로그인</StLink>
 				</div>
@@ -51,7 +57,10 @@ const StLink = styled(Link)`
 	:hover::after {
 		width: 50%;
 	}
+<<<<<<< HEAD
 	:last-child {
 		margin-right: 0;
 	}
+=======
+>>>>>>> seokwon
 `;

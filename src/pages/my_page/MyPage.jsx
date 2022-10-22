@@ -1,10 +1,16 @@
-import React from "react";
+import Layout from "../../components/Layout";
+import UserInfo from "../../components/UserInfo";
+import UserContent from "../../components/UserContent";
 
-const MyPage = ({}) => {
+const Mypage = () => {
 	return (
 		<>
-			<div>MyPage</div>
+			{/* <Background /> */}
+			<Layout>
+				<UserInfo />
+				<UserContent />
+			</Layout>
 		</>
 	);
 };
-export default MyPage;
+export default Mypage;
