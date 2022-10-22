@@ -11,6 +11,7 @@
 # production
 /build
 
+.prettierrc.js
 
 
 # misc

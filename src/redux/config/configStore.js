@@ -1,11 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import todos from '../modules/_todoSlice';
-import comments from '../modules/_commentsSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import todos from "../modules/_todoSlice";
 
 const store = configureStore({
-  reducer: {
-    todos,
-  },
+	reducer: {
+		todos,
+	},
 });
 
 export default store;

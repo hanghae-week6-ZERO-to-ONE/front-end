@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const Sign = ({}) => {
-  return (
-    <>
-      <div>Sign</div>
-    </>
-  );
+	return (
+		<>
+			<div>Sign</div>
+		</>
+	);
 };
 export default Sign;
