@@ -1,4 +1,4 @@
-import zerocider from "../images/zerocider.png";
+import zerocider from "../../components/../images/zerocider.png";
 import styled from "styled-components";
 
 function UserContentImg() {
@@ -10,7 +10,6 @@ function UserContentImg() {
 		</>
 	);
 }
-
 export default UserContentImg;
 
 const ImgWrap = styled.div``;
