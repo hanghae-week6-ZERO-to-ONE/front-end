@@ -7,6 +7,6 @@ const Layout = ({ children }) => {
 export default Layout;
 const Layoutdiv = styled.div`
   width: 1280px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 20px auto;
 `;
