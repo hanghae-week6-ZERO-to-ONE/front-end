@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Layout = ({ children }) => {
-  return <Layoutdiv>{children}</Layoutdiv>;
+	return <LayoutDiv>{children}</LayoutDiv>;
 };
+
 export default Layout;
-const Layoutdiv = styled.div`
-  width: 1280px;
-  height: 100vh;
-  margin: 20px auto;
+const LayoutDiv = styled.div`
+	width: 1280px;
+	height: 100vh;
+	margin: 20px auto;
 `;
