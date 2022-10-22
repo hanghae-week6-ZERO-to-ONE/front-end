@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/Header";
-import Login from "../pages/login/Login";
+import LoginPage from "../pages/login/LoginPage";
 import MyPage from "../pages/my_page/MyPage";
 import Sign from "../pages/sign/Sign";
 import Upload from "../pages/upload/Upload";
@@ -22,7 +22,7 @@ const Router = () => {
 					<Route path="upload" element={<Upload />} />
 					<Route path="sign" element={<Sign />} />
 				</Route>
-				<Route path="login" element={<Login />} />
+				<Route path="login" element={<LoginPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
