@@ -8,12 +8,8 @@ import { ThemeProvider } from 'styled-components';
 import store from './redux/config/configStore';
 
 const theme = {
-  BLUE_1: '#B7CEE8',
-  BLUE_2: '#90b4dc',
-  BLUE_3: '#577399',
-  BLUE_4: '#495867',
-  GREY: '#D8DBE2',
-  LIGHT_GREY: '#E7E9ED',
+  FLUORESCENT: '#CDE230',
+  BLACK: '232323',
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
