@@ -1,8 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { fileUploadApi } from "../../axios";
 
 function UploadContent() {
 	const [image, setImage] = useState(null);
+
+	const [data, setData] = useState({});
 
 	const fileUpload = e => {
 		//1. 이미지 없을 때 처리
@@ -13,9 +16,34 @@ function UploadContent() {
 
 		setImage(image);
 	};
+
+	const onChangeHandler = e => {
+		const { name, value } = e.target;
+
+		setData({ ...data, [name]: value });
+		console.log(data);
+	};
+
+	const submitHandler = e => {
+		e.preventDefault();
+
+		const formData = new FormData();
+
+		Object.entries(data).forEach(([key, value]) => {
+			formData.append(key, value);
+		});
+
+		//formData.append("image", data.image);
+		//formData.append("title", data.title);
+		//formData.append("category", data.category);
+		//formData.append("desc", data.desc);
+
+		fileUploadApi(formData);
+	};
+
 	return (
 		<>
-			<Wrap>
+			<Wrap onSubmit={submitHandler}>
 				<ImageLayout>
 					<ImageLabel htmlFor="file" />
 					<ImageInput
@@ -30,14 +58,15 @@ function UploadContent() {
 
 				<ContentWrap>게시글 업로드</ContentWrap>
 				<ContentWrap2>
-					<input type="text" placeholder="제목" />
+					<input type="text" name="title" onChange={onChangeHandler} placeholder="제목" />
 				</ContentWrap2>
 				<ContentWrap2>
-					<input type="text" placeholder="카테고리" />
+					<input type="text" name="category" onChange={onChangeHandler} placeholder="카테고리" />
 				</ContentWrap2>
 				<ContentWrap2>
-					<input type="text" placeholder="설명" />
+					<input type="text" name="desc" onChange={onChangeHandler} placeholder="설명" />
 				</ContentWrap2>
+				<button>업로드</button>
 			</Wrap>
 		</>
 	);
@@ -45,7 +74,7 @@ function UploadContent() {
 
 export default UploadContent;
 
-const Wrap = styled.div`
+const Wrap = styled.form`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
