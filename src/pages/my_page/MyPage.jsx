@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
-import UserInfo from "../../components/UserInfo";
-import UserContent from "../../components/UserContent";
+import UserInfo from "../../components/my_page/UserInfo";
+import UserContent from "../../components/my_page/UserContent";
 
 const Mypage = () => {
 	return (

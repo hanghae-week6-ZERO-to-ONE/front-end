@@ -49,10 +49,7 @@ const StLink = styled(Link)`
 	:hover::after {
 		width: 50%;
 	}
-<<<<<<< HEAD
 	:last-child {
 		margin-right: 0;
 	}
-=======
->>>>>>> seokwon
 `;
