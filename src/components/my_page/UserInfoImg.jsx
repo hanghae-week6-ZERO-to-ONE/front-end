@@ -1,4 +1,4 @@
-import mask from "../../components/../images/mask.png";
+import mask from "../../images/mask.png";
 import styled from "styled-components";
 // import Upload from "../pages/upload/Upload";
 
