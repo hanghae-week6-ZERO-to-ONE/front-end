@@ -1,8 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
 
 const Login = ({}) => {
+	const navigate = useNavigate();
+
+	const handleLogin = e => {
+		e.preventDefault();
+		// 1. dispatch(__loginDB({name: string, password: string}))
+	};
+
+	const handleButton2 = e => {
+		e.preventDefault();
+		navigate(`/sign`);
+	};
+
 	return (
 		<>
 			<LoginDiv>
@@ -14,8 +27,8 @@ const Login = ({}) => {
 				</IdPasswordDiv>
 
 				<ButtonsDiv>
-					<Buttons>로그인</Buttons>
-					<Buttons>회원가입하기</Buttons>
+					<Buttons onClick={handleLogin}>로그인</Buttons>
+					<Buttons onClick={handleButton2}>회원가입하기</Buttons>
 				</ButtonsDiv>
 			</LoginDiv>
 		</>

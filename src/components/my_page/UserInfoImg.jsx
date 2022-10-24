@@ -1,6 +1,6 @@
-import mask from "../images/mask.png";
+import mask from "../../images/mask.png";
 import styled from "styled-components";
-import Upload from "../pages/upload/Upload";
+// import Upload from "../pages/upload/Upload";
 
 function UserInfoImg() {
 	return (
@@ -9,7 +9,7 @@ function UserInfoImg() {
 				<img src={mask} alt="mask" />
 			</ImgWrap>
 
-			<UserName> 유저 이름</UserName>
+			<UserName>유저 이름</UserName>
 		</>
 	);
 }
