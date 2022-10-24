@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.data);
+	console.log(board);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
@@ -25,41 +26,49 @@ const DrinkListWrap = () => {
 				<article>
 					<h2>최신</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board
+							?.filter(data => data.category === "최신")
+							.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
 				<article>
 					<h2>프로틴</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board
+							?.filter(data => data.category === "프로틴")
+							.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
 				<article>
 					<h2>제로슈가</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board
+							?.filter(data => data.category === "제로슈가")
+							.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
 				<article>
 					<h2>건강음료</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board
+							?.filter(data => data.category === "건강음료")
+							.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
 				<article>
@@ -67,11 +76,13 @@ const DrinkListWrap = () => {
 						<Link to={`/category/:category`}>이온음료</Link>
 					</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board
+							?.filter(data => data.category === "이온음료")
+							.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
 			</DrinkWrap>

@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 Prac_2.jsx
-db.json
+
 # testing
 /coverage
 
@@ -21,6 +21,7 @@ db.json
 .env.development.local
 .env.test.local
 .env.production.local
+db.json
 
 npm-debug.log*
 yarn-debug.log*
