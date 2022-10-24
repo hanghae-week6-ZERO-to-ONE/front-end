@@ -16,7 +16,7 @@ export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI)
 	}
 });
 
-export const __getBoardDelete = createAsyncThunk("DELETE_POST", async (payload, thunkAPI) => {
+export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payload, thunkAPI) => {
 	try {
 		axios.delete(`http://localhost:3001/board/${payload}`);
 		return thunkAPI.fulfillWithValue(payload);
@@ -24,7 +24,8 @@ export const __getBoardDelete = createAsyncThunk("DELETE_POST", async (payload, 
 		return thunkAPI.rejectWithValue(e.code);
 	}
 });
-export const __updateBoard = createAsyncThunk("UPDATE_POST", async (payload, thunkAPI) => {
+
+export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thunkAPI) => {
 	// console.log(payload);
 	try {
 		const { data } = await axios.put(`http://localhost:3001/board/${payload}`, payload);
@@ -58,6 +59,7 @@ export const boardSlice = createSlice({
 			state.isLoading = true;
 		},
 		[__updateBoard.fulfilled]: (state, action) => {
+			state.isLoading = false;
 			state.post = action.payload;
 		},
 		[__updateBoard.rejected]: (state, action) => {
