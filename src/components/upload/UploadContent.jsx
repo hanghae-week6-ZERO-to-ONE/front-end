@@ -29,6 +29,10 @@ function UploadContent() {
 
 		const formData = new FormData();
 
+		// for (let value of formData.values()) {
+		// 	console.log(value);
+		//
+
 		Object.entries(data).forEach(([key, value]) => {
 			formData.append(key, value);
 		});
