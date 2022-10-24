@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
 	isLogin: false,
+	error: null,
 };
 
 // data 값으로 {name: string, password: string}이렇게 넣는다
@@ -31,7 +32,6 @@ const userSlice = createSlice({
 	reducers: {},
 	extraReducers: {
 		[__loginDB.fulfilled]: (state, action) => {
-			state.success = action.payload;
 			state.isLogin = true;
 		},
 		[__loginDB.rejected]: (state, action) => {
