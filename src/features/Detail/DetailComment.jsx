@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import DetailCommentContent from "../../features/Detail/DetailCommentContent";
-import { __addComment, __getComment } from "../../redux/modules/comment";
+import { __getComment } from "../../redux/modules/comment";
 
 const DetailComment = () => {
 	const { id } = useParams();
+	console.log(id);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(__getComment());

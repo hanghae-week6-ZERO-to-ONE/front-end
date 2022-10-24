@@ -2,7 +2,7 @@ import CategoryExplanation from "../../features/Category/CategoryExplanation";
 import Layout from "../../components/Layout";
 import CategoryImgWrap from "../../features/Category/CategoryImgWrap";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 const Category = () => {

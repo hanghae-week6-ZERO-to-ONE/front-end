@@ -4,7 +4,7 @@ import userImage from "../../images/userImage.png";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { __addComment, __deleteComment, __updateComment } from "../../redux/modules/comment";
+import { __deleteComment } from "../../redux/modules/comment";
 const DetailCommentContent = ({ comment }) => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

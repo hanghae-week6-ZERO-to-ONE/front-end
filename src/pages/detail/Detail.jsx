@@ -18,7 +18,7 @@ const Detail = () => {
 	const { category, id, image, title, content, heartNum } = state;
 	const [editTitle, setEditTitle] = useState();
 	const [editContent, setEditContent] = useState();
-	const [heart, setHeart] = useState(heartNum);
+	const [heart] = useState(heartNum);
 	// console.log("category", category);
 	// console.log("id", id);
 	// console.log("image", image);
@@ -28,8 +28,8 @@ const Detail = () => {
 	useEffect(() => {}, [title, content]);
 
 	useEffect(() => {
-		dispatch(__getBoard(id));
-	}, []);
+		dispatch(__getBoard());
+	}, [dispatch]);
 
 	const onDeleteHandler = () => {
 		dispatch(__getBoardDelete(id));
