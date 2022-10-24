@@ -2,59 +2,68 @@ import Layout from "../../components/Layout";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DetailImg from "../../features/Detail/DetailImg";
-import DetailExplanation from "../../features/Detail/DetailExplanation";
 import DetailComment from "../../features/Detail/DetailComment";
-import DetailCommentContent from "../../features/Detail/DetailCommentContent";
 import { __getBoard, __getBoardDelete, __updateBoard } from "../../redux/modules/board";
 
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Detail = () => {
+	const comment = useSelector(state => state.comment.data);
+	console.log(comment);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [edit, setEdit] = useState();
-	const [isEdit, setIsEdit] = useState(true);
 	const { state } = useLocation();
+	const [isEdit, setIsEdit] = useState(true);
 	const { category, id, image, title, content, heartNum } = state;
+	const [editTitle, setEditTitle] = useState();
+	const [editContent, setEditContent] = useState();
+	const [heart, setHeart] = useState(heartNum);
 	// console.log("category", category);
 	// console.log("id", id);
 	// console.log("image", image);
-	// console.log("title", title);
-	// console.log("content", content);
-	// console.log("heartNum", heartNum);
+	console.log("title", title);
+	console.log("content", content);
+	// console.log("heartNum", heart);
+	useEffect(() => {}, [title, content]);
 
 	useEffect(() => {
-		dispatch(__getBoard());
-	}, [dispatch]);
+		dispatch(__getBoard(id));
+	}, []);
+
 	const onDeleteHandler = () => {
 		dispatch(__getBoardDelete(id));
 		navigate(`/`);
 	};
+
 	const editHandler = () => {
 		dispatch(
 			__updateBoard({
-				id,
-				title,
-				content: content,
+				id: id,
+				title: editTitle,
+				content: editContent,
+				category: category,
+				image: image,
+				heartNum: heart,
 			})
 		);
-		navigate(`/`);
+		navigate(`/detail/${id}`);
+		console.log("state", state);
+	};
+
+	const titleHandler = e => {
+		setEditTitle(e.target.value);
 	};
 
 	const contentHandler = e => {
-		setEdit(e.target.value);
-		console.log(e.target.value);
-		// dispatch(__getComment(comment.id))
+		setEditContent(e.target.value);
 	};
-
 	return (
 		<>
 			<Layout>
 				<DetailWrap>
 					<ImgWrap>
-						<img src={image} alt="" />
+						<img src={image} alt={title} />
 					</ImgWrap>
 
 					<DetailExplanationWrap>
@@ -62,7 +71,7 @@ const Detail = () => {
 							{isEdit ? (
 								<>
 									<h2>{title}</h2>
-									<Content>내용</Content>
+									<Content>{content}</Content>
 									<EditDelete>
 										<span>{<button onClick={() => setIsEdit(!isEdit)}>편집</button>}</span>
 										<span>
@@ -83,12 +92,12 @@ const Detail = () => {
 								</>
 							) : (
 								<>
-									<input type="text" value={content} onChange={contentHandler} />
-									<input placeholder="내용" />
 									<EditDelete>
-										<span>
-											<button onClick={() => editHandler()}>수정</button>
-										</span>
+										<div>
+											<input type="text" onChange={titleHandler} value={title} />
+											<input type="text" onChange={contentHandler} value={content} />
+											<button onClick={editHandler}>수정</button>
+										</div>
 										<span>
 											<button
 												onClick={() => {
@@ -111,13 +120,12 @@ const Detail = () => {
 						<LikeWrap>
 							<button>
 								<span>♥</span>
-								<span>좋아요 30개</span>
+								<span>좋아요 {heartNum}개</span>
 							</button>
 						</LikeWrap>
 					</DetailExplanationWrap>
 				</DetailWrap>
 				<DetailComment />
-				<DetailCommentContent />
 			</Layout>
 		</>
 	);

@@ -2,8 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import userImage from "../../images/userImage.png";
 import { useState } from "react";
-const DetailCommentContent = () => {
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { __addComment, __deleteComment, __updateComment } from "../../redux/modules/comment";
+const DetailCommentContent = ({ comment }) => {
+	const { id } = useParams();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [isEdit, setIsEdit] = useState(false);
+	const onDeleteHandler = () => {
+		dispatch(__deleteComment(comment.id));
+		navigate(`/detail/${id}`);
+	};
 	return (
 		<>
 			{isEdit ? (
@@ -16,7 +26,18 @@ const DetailCommentContent = () => {
 						</div>
 						<div>
 							<button onClick={() => setIsEdit(isEdit)}>수정완료</button>
-							<button>삭제</button>
+							<button
+								onClick={() => {
+									const result = window.confirm("이 게시글을 지울까요?");
+									if (result) {
+										return onDeleteHandler();
+									} else {
+										return;
+									}
+								}}
+							>
+								삭제
+							</button>
 						</div>
 					</CommentWrap>
 				</>
@@ -25,11 +46,22 @@ const DetailCommentContent = () => {
 					<div>
 						<img src={userImage} alt="userImage" />
 						<span>국경훈</span>
-						<span>최고에요</span>
+						<span>{comment.content}</span>
 					</div>
 					<div>
 						<button onClick={() => setIsEdit(!isEdit)}>수정</button>
-						<button>삭제</button>
+						<button
+							onClick={() => {
+								const result = window.confirm("이 게시글을 지울까요?");
+								if (result) {
+									return onDeleteHandler();
+								} else {
+									return;
+								}
+							}}
+						>
+							삭제
+						</button>
 					</div>
 				</CommentWrap>
 			)}

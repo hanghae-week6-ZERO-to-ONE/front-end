@@ -12,7 +12,7 @@ const DrinkListWrap = () => {
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
-	const categoryArray = ["최신", "프로틴음료", "제로슈가", "건강음료", "이온음료"];
+	const categoryArray = ["프로틴음료", "제로슈가", "건강음료", "이온음료"];
 	return (
 		<>
 			<DrinkWrap>
@@ -26,94 +26,26 @@ const DrinkListWrap = () => {
 						))}
 					</ul>
 				</article>
-				{categoryArray
-					?.filter(category => category === "프로틴음료")
-					.map(category => {
-						return (
-							<>
-								<article>
-									<h2>
-										<Link to={`/category/${category}`}>프로틴음료</Link>
-									</h2>
-									<ul>
-										{board
-											?.filter(data => data.category === "프로틴음료")
-											.map(data => (
-												<>
-													<Drink key={data.id} board={data} />
-												</>
-											))}
-									</ul>
-								</article>
-							</>
-						);
-					})}
-				{categoryArray
-					?.filter(category => category === "제로슈가")
-					.map(category => {
-						return (
-							<>
-								<article>
-									<h2>
-										<Link to={`/category/${category}`}>제로슈가</Link>
-									</h2>
-									<ul>
-										{board
-											?.filter(data => data.category === "제로슈가")
-											.map(data => (
-												<>
-													<Drink key={data.id} board={data} />
-												</>
-											))}
-									</ul>
-								</article>
-							</>
-						);
-					})}
-				{categoryArray
-					?.filter(category => category === "건강음료")
-					.map(category => {
-						return (
-							<>
-								<article>
-									<h2>
-										<Link to={`/category/${category}`}>건강음료</Link>
-									</h2>
-									<ul>
-										{board
-											?.filter(data => data.category === "건강음료")
-											.map(data => (
-												<>
-													<Drink key={data.id} board={data} />
-												</>
-											))}
-									</ul>
-								</article>
-							</>
-						);
-					})}
-				{categoryArray
-					?.filter(category => category === "이온음료")
-					.map(category => {
-						return (
-							<>
-								<article>
-									<h2>
-										<Link to={`/category/${category}`}>이온음료</Link>
-									</h2>
-									<ul>
-										{board
-											?.filter(data => data.category === "이온음료")
-											.map(data => (
-												<>
-													<Drink key={data.id} board={data} />
-												</>
-											))}
-									</ul>
-								</article>
-							</>
-						);
-					})}
+				{categoryArray.map((category, index) => {
+					return (
+						<>
+							<article key={index}>
+								<h2>
+									<Link to={`/category/${category}`}>{category}</Link>
+								</h2>
+								<ul>
+									{board
+										?.filter(data => data.category === `${category}`)
+										.map(data => (
+											<>
+												<Drink key={data.id} board={data} />
+											</>
+										))}
+								</ul>
+							</article>
+						</>
+					);
+				})}
 			</DrinkWrap>
 		</>
 	);
