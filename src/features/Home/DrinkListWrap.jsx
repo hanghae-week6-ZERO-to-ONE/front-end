@@ -1,90 +1,119 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import RecentlyList from "./RecentList";
-import DrinkListZero from "./DrinkListZero";
-import DrinkListOrganic from "./DrinkListOrganic";
-import DrinkListProtein from "./DrinkListProtein";
-import DrinkListHealth from "./DrinkListHealth";
-import AlcoholList from "./AlcoholList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getBoard } from "../../redux/modules/board";
 import { Link } from "react-router-dom";
 import Drink from "./Drink";
-import { useParams } from "react-router-dom";
 
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.data);
-	console.log(board);
+
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
-
+	const categoryArray = ["최신", "프로틴음료", "제로슈가", "건강음료", "이온음료"];
 	return (
 		<>
 			<DrinkWrap>
 				<article>
 					<h2>최신</h2>
 					<ul>
-						{board
-							?.filter(data => data.category === "최신")
-							.map(data => (
-								<>
-									<Drink key={data.id} board={data} />
-								</>
-							))}
+						{board?.map(data => (
+							<>
+								<Drink key={data.id} board={data} />
+							</>
+						))}
 					</ul>
 				</article>
-				<article>
-					<h2>프로틴</h2>
-					<ul>
-						{board
-							?.filter(data => data.category === "프로틴")
-							.map(data => (
-								<>
-									<Drink key={data.id} board={data} />
-								</>
-							))}
-					</ul>
-				</article>
-				<article>
-					<h2>제로슈가</h2>
-					<ul>
-						{board
-							?.filter(data => data.category === "제로슈가")
-							.map(data => (
-								<>
-									<Drink key={data.id} board={data} />
-								</>
-							))}
-					</ul>
-				</article>
-				<article>
-					<h2>건강음료</h2>
-					<ul>
-						{board
-							?.filter(data => data.category === "건강음료")
-							.map(data => (
-								<>
-									<Drink key={data.id} board={data} />
-								</>
-							))}
-					</ul>
-				</article>
-				<article>
-					<h2>
-						<Link to={`/category/:category`}>이온음료</Link>
-					</h2>
-					<ul>
-						{board
-							?.filter(data => data.category === "이온음료")
-							.map(data => (
-								<>
-									<Drink key={data.id} board={data} />
-								</>
-							))}
-					</ul>
-				</article>
+				{categoryArray
+					?.filter(category => category === "프로틴음료")
+					.map(category => {
+						return (
+							<>
+								<article>
+									<h2>
+										<Link to={`/category/${category}`}>프로틴음료</Link>
+									</h2>
+									<ul>
+										{board
+											?.filter(data => data.category === "프로틴음료")
+											.map(data => (
+												<>
+													<Drink key={data.id} board={data} />
+												</>
+											))}
+									</ul>
+								</article>
+							</>
+						);
+					})}
+				{categoryArray
+					?.filter(category => category === "제로슈가")
+					.map(category => {
+						return (
+							<>
+								<article>
+									<h2>
+										<Link to={`/category/${category}`}>제로슈가</Link>
+									</h2>
+									<ul>
+										{board
+											?.filter(data => data.category === "제로슈가")
+											.map(data => (
+												<>
+													<Drink key={data.id} board={data} />
+												</>
+											))}
+									</ul>
+								</article>
+							</>
+						);
+					})}
+				{categoryArray
+					?.filter(category => category === "건강음료")
+					.map(category => {
+						return (
+							<>
+								<article>
+									<h2>
+										<Link to={`/category/${category}`}>건강음료</Link>
+									</h2>
+									<ul>
+										{board
+											?.filter(data => data.category === "건강음료")
+											.map(data => (
+												<>
+													<Drink key={data.id} board={data} />
+												</>
+											))}
+									</ul>
+								</article>
+							</>
+						);
+					})}
+				{categoryArray
+					?.filter(category => category === "이온음료")
+					.map(category => {
+						return (
+							<>
+								<article>
+									<h2>
+										<Link to={`/category/${category}`}>이온음료</Link>
+									</h2>
+									<ul>
+										{board
+											?.filter(data => data.category === "이온음료")
+											.map(data => (
+												<>
+													<Drink key={data.id} board={data} />
+												</>
+											))}
+									</ul>
+								</article>
+							</>
+						);
+					})}
 			</DrinkWrap>
 		</>
 	);

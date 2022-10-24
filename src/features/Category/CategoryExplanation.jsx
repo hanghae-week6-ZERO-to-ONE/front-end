@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const CategoryExplanation = () => {
+const CategoryExplanation = ({ category }) => {
 	return (
 		<>
-			<Title>제로슈가</Title>
+			<Title>{category}</Title>
 			<ExplanationWrap>
-				<h2>제로슈가</h2>
+				<h2>{category}</h2>
 				<p>제로슈가는 맛있다</p>
 			</ExplanationWrap>
 		</>
