@@ -7,37 +7,60 @@ import { useNavigate } from "react-router-dom";
 const Sign = ({}) => {
 	const navigate = useNavigate();
 
+	// 회원가입하기
 	const handleSign = e => {
 		e.preventDefault();
+		// 1. 이메일, 비번 맞나 확인하기
+		// 2. axios로 보내기
+		//
 
 		navigate(`/`);
+	};
+
+	const checkOverlap = e => {
+		e.preventDefault();
+		// 1. axios로 아이디 보내기
+
+		// 2. success 가 true, false 로
+		// 메세지 띄우기
+
+		console.log("checkOverlap");
+	};
+
+	const handleCancel = e => {
+		// 1. state값 다 지우기
+
+		e.preventDefault();
+		console.log("handleCancel");
 	};
 
 	return (
 		<>
 			<SignSection>
-				<IdDiv>
-					<IdInputDiv>
-						<IconImg src={person} />
-						<IdInput placeholder="아이디" />
-					</IdInputDiv>
-					<IdButton>중복확인</IdButton>
-				</IdDiv>
+				<form onSubmit={handleSign}>
+					<IdDiv>
+						<IdInputDiv>
+							<IconImg src={person} />
+							<IdInput placeholder="아이디" />
+						</IdInputDiv>
+						<IdButton onClick={checkOverlap}>중복확인</IdButton>
+					</IdDiv>
 
-				<PwDiv>
-					<IconImg src={lock} />
-					<PwInput placeholder="비밀번호" />
-				</PwDiv>
+					<PwDiv>
+						<IconImg src={lock} />
+						<PwInput placeholder="비밀번호" />
+					</PwDiv>
 
-				<PwAgainDiv>
-					<IconImg src={lock} />
-					<PwAgainInput placeholder="비밀번호 재입력" />
-				</PwAgainDiv>
+					<PwAgainDiv>
+						<IconImg src={lock} />
+						<PwAgainInput placeholder="비밀번호 재입력" />
+					</PwAgainDiv>
 
-				<ButtonsDiv>
-					<Button1>취소</Button1>
-					<Button2 onClick={handleSign}>회원가입</Button2>
-				</ButtonsDiv>
+					<ButtonsDiv>
+						<Button1 onClick={handleCancel}>취소</Button1>
+						<Button2>회원가입</Button2>
+					</ButtonsDiv>
+				</form>
 			</SignSection>
 		</>
 	);

@@ -6,7 +6,10 @@ import logo from "../../images/logo.png";
 const Login = ({}) => {
 	const navigate = useNavigate();
 
-	const handleButton1 = () => {};
+	const handleLogin = e => {
+		e.preventDefault();
+		// 1. dispatch(__loginDB({name: string, password: string}))
+	};
 
 	const handleButton2 = e => {
 		e.preventDefault();
@@ -24,7 +27,7 @@ const Login = ({}) => {
 				</IdPasswordDiv>
 
 				<ButtonsDiv>
-					<Buttons onClick={handleButton1}>로그인</Buttons>
+					<Buttons onClick={handleLogin}>로그인</Buttons>
 					<Buttons onClick={handleButton2}>회원가입하기</Buttons>
 				</ButtonsDiv>
 			</LoginDiv>
