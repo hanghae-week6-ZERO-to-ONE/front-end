@@ -1,7 +1,9 @@
-const Upload = ({}) => {
+import UploadContent from "../../components/upload/UploadContent";
+
+const Upload = () => {
 	return (
 		<>
-			<div>Upload</div>
+			<UploadContent></UploadContent>
 		</>
 	);
 };
