@@ -2,31 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import userImage from "../../images/userImage.png";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { __deleteComment, __updateComment, __getComment } from "../../redux/modules/comment";
-const DetailCommentContent = ({ comment }) => {
+const DetailCommentContent = ({ comment, setClicked, clicked }) => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [isEdit, setIsEdit] = useState(false);
-	const [editText, setEditText] = useState(comment.contents);
+	const [editText, setEditText] = useState(comment.content);
 
 	useEffect(() => {
 		dispatch(__getComment());
 	}, [dispatch]);
 	const onDeleteHandler = () => {
 		dispatch(__deleteComment(comment.id));
-		navigate(`/detail/${id}`);
+		setClicked(!clicked);
+		// navigate(`/detail/${id}`);
 	};
 	const editHandler = () => {
-		dispatch(__updateComment(...comment, editText));
+		dispatch(__updateComment({ ...comment, content: editText }));
 		setIsEdit(!isEdit);
-		// navigate(`/detail/${id}`, {
-		// 	state: {
-		// 		comment,
-		// 	},
-		// });
 	};
 	const edit = e => {
 		setEditText(e.target.value);
@@ -61,7 +57,7 @@ const DetailCommentContent = ({ comment }) => {
 					<div>
 						<img src={userImage} alt="userImage" />
 						<span>{comment.username}</span>
-						<span>{comment.comment}</span>
+						<span>{comment.content}</span>
 					</div>
 					<div>
 						<button onClick={() => setIsEdit(!isEdit)}>수정</button>

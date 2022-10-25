@@ -10,27 +10,27 @@ const DetailComment = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const comment = useSelector(state => state.comment.comment);
-	console.log(comment);
+	const comments = useSelector(state => state.comment.comments);
+	// console.log(comment);
 	const [inputForm, setInputForm] = useState("");
-
+	const [clicked, setClicked] = useState(false);
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (inputForm) {
 			dispatch(
 				__addComment({
-					comment: inputForm,
+					content: inputForm,
 				})
 			);
 			setInputForm("");
-			navigate(`/detail/${id}`);
 		} else {
 			alert("내용을 입력해주세요");
 		}
+		// navigate(`/detail/${id}`);
 	};
 	useEffect(() => {
 		dispatch(__getComment());
-	}, [dispatch]);
+	}, [dispatch, clicked]);
 
 	return (
 		<DetailCommentWrap>
@@ -47,9 +47,16 @@ const DetailComment = () => {
 					<button onClick={handleSubmit}>작성</button>
 				</div>
 			</CommentWriteWrap>
-			{comment &&
-				comment?.map((com, idx) => {
-					return <DetailCommentContent comment={com} key={idx} />;
+			{comments &&
+				comments?.map((com, idx) => {
+					return (
+						<DetailCommentContent
+							clicked={clicked}
+							setClicked={setClicked}
+							comment={com}
+							key={idx}
+						/>
+					);
 				})}
 		</DetailCommentWrap>
 	);

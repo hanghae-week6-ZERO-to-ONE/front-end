@@ -59,7 +59,7 @@ export const boardSlice = createSlice({
 		},
 		[__updateBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.board = [...action.payload];
+			state.board.push(action.payload);
 		},
 		[__updateBoard.rejected]: (state, action) => {
 			state.isLoading = false;
