@@ -7,7 +7,7 @@ import Drink from "./Drink";
 
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
-	const board = useSelector(state => state.board.data);
+	const board = useSelector(state => state.board.board);
 
 	useEffect(() => {
 		dispatch(__getBoard());
@@ -68,7 +68,8 @@ const DrinkWrap = styled.section`
 	ul {
 		display: flex;
 		justify-content: flex-start;
-		gap: 25px;
+		gap: 50px;
+		flex-wrap: wrap;
 	}
 	li {
 		width: 200px;

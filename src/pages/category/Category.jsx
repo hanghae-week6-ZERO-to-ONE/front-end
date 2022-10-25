@@ -1,14 +1,20 @@
 import CategoryExplanation from "../../features/Category/CategoryExplanation";
+import { useEffect } from "react";
 import Layout from "../../components/Layout";
 import CategoryImgWrap from "../../features/Category/CategoryImgWrap";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { __getBoard } from "../../redux/modules/board";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 const Category = () => {
+	const dispatch = useDispatch();
 	const params = useParams();
-	const board = useSelector(state => state.board.data);
-
+	const board = useSelector(state => state.board.board);
+	useEffect(() => {
+		dispatch(__getBoard());
+	}, [dispatch]);
+	console.log(board);
 	return (
 		<>
 			<Layout>
@@ -56,5 +62,6 @@ const StLink = styled(Link)`
 const CategoryUl = styled.ul`
 	clear: both;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
+	flex-wrap: wrap;
 `;

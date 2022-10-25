@@ -12,8 +12,8 @@ export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thun
 
 export const __getComment = createAsyncThunk("GET_COMMENT", async (payload, thunkAPI) => {
 	try {
-		const { data } = await axios.get(`http://localhost:3001/comment/`, payload);
-		return thunkAPI.fulfillWithValue(data);
+		const data = await axios.get(`http://localhost:3001/comment/`, payload);
+		return thunkAPI.fulfillWithValue(data.data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
 	}
@@ -61,7 +61,7 @@ export const commentSlice = createSlice({
 		},
 		[__addComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.comment = action.payload;
+			state.comment.push(action.payload);
 		},
 		[__addComment.rejected]: state => {
 			state.isLoading = false;
@@ -71,29 +71,19 @@ export const commentSlice = createSlice({
 		},
 		[__getComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.comment = action.payload;
+			state.comment = [...action.payload];
 		},
-		[__getComment.rejected]: state => {
+		[__getComment.rejected]: (state, action) => {
 			state.isLoading = false;
+			state.error = action.payload;
 		},
 
-		[__getCommentById.pending]: state => {
-			state.isLoading = true;
-		},
-		[__getCommentById.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.comment.data = action.payload;
-		},
-		[__getCommentById.rejected]: state => {
-			state.isLoading = false;
-		},
 		[__deleteComment.pending]: state => {
 			state.isLoading = true;
 		},
 		[__deleteComment.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			const target = state.comments.data.filter(comment => comment.id !== action.payload);
-			state.comment.data = target;
+			state.isLoading = true;
+			state.comment = state.comment.filter(comment => comment.id !== action.payload);
 		},
 		[__deleteComment.rejected]: state => {
 			state.isLoading = false;
@@ -103,7 +93,7 @@ export const commentSlice = createSlice({
 		},
 		[__updateComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.data = action.payload;
+			state.comment = [...action.payload];
 		},
 		[__updateComment.rejected]: (state, action) => {
 			state.isLoading = false;

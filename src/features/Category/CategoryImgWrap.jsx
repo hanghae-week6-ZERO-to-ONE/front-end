@@ -31,7 +31,7 @@ export default CategoryImgWrap;
 
 const Categoryli = styled.li`
 	margin-bottom: 200px;
-
+	cursor: pointer;
 	width: 255px;
 	height: 250px;
 

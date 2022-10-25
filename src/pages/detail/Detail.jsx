@@ -18,7 +18,7 @@ const Detail = () => {
 	const [editContent, setEditContent] = useState(content);
 	const [editCategory] = useState(category);
 	const [editImage] = useState(image);
-	const [heart] = useState(heartNum);
+	const [heart, setHeart] = useState(heartNum);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
@@ -47,7 +47,7 @@ const Detail = () => {
 				content: editContent,
 				category: editCategory,
 				image: editImage,
-				heartNum: heartNum,
+				heartNum: heart,
 			},
 		});
 	};
@@ -59,6 +59,11 @@ const Detail = () => {
 	const contentHandler = e => {
 		setEditContent(e.target.value);
 	};
+
+	const heartToggle = () => {
+		setHeart(heart => heart + 1);
+	};
+	useEffect(heartToggle, []);
 	return (
 		<>
 			<Layout>
@@ -121,14 +126,14 @@ const Detail = () => {
 						</ContentTitleWrap>
 
 						<LikeWrap>
-							<button>
+							<button onClick={() => heartToggle()}>
 								<span>♥</span>
-								<span>좋아요 {heartNum}개</span>
+								<span>좋아요 {heart}개</span>
 							</button>
 						</LikeWrap>
 					</DetailExplanationWrap>
 				</DetailWrap>
-				<DetailComment category={category} />
+				<DetailComment />
 			</Layout>
 		</>
 	);

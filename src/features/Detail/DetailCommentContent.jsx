@@ -1,29 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import userImage from "../../images/userImage.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { __deleteComment, __updateComment } from "../../redux/modules/comment";
+import { __deleteComment, __updateComment, __getComment } from "../../redux/modules/comment";
 const DetailCommentContent = ({ comment }) => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [isEdit, setIsEdit] = useState(false);
-	const [editText, setEditText] = useState(comment.content);
+	const [editText, setEditText] = useState(comment.contents);
+
+	useEffect(() => {
+		dispatch(__getComment());
+	}, [dispatch]);
 	const onDeleteHandler = () => {
 		dispatch(__deleteComment(comment.id));
 		navigate(`/detail/${id}`);
 	};
 	const editHandler = () => {
-		dispatch(__updateComment(comment.content));
+		dispatch(__updateComment(...comment, editText));
 		setIsEdit(!isEdit);
-		navigate(`/detail/${id}`, {
-			state: {
-				id: id,
-				content: editText,
-			},
-		});
+		// navigate(`/detail/${id}`, {
+		// 	state: {
+		// 		comment,
+		// 	},
+		// });
 	};
 	const edit = e => {
 		setEditText(e.target.value);
@@ -35,7 +38,7 @@ const DetailCommentContent = ({ comment }) => {
 					<CommentWrap>
 						<div>
 							<img src={userImage} alt="userImage" />
-							<span>국경훈</span>
+							<span>{comment.username}</span>
 							<input placeholder="댓글입력" type="text" value={editText} onChange={edit} />
 							<button onClick={editHandler}>수정완료</button>
 							<button
@@ -58,7 +61,7 @@ const DetailCommentContent = ({ comment }) => {
 					<div>
 						<img src={userImage} alt="userImage" />
 						<span>{comment.username}</span>
-						<span>{comment.content}</span>
+						<span>{comment.comment}</span>
 					</div>
 					<div>
 						<button onClick={() => setIsEdit(!isEdit)}>수정</button>
@@ -82,6 +85,7 @@ const DetailCommentContent = ({ comment }) => {
 };
 
 export default DetailCommentContent;
+
 const CommentWrap = styled.article`
 	margin: 0 auto;
 	width: 1060px;
