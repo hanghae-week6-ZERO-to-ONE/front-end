@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-
 import styled from "styled-components";
 import DetailCommentContent from "../../features/Detail/DetailCommentContent";
 import { __getComment, __addComment } from "../../redux/modules/comment";
 
 const DetailComment = () => {
 	const dispatch = useDispatch();
-	const { id } = useParams();
-	const navigate = useNavigate();
+
 	const comments = useSelector(state => state.comment.comments);
 	// console.log(comment);
 	const [inputForm, setInputForm] = useState("");
@@ -53,7 +50,7 @@ const DetailComment = () => {
 						<DetailCommentContent
 							clicked={clicked}
 							setClicked={setClicked}
-							comment={com}
+							comments={com}
 							key={idx}
 						/>
 					);
