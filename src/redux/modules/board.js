@@ -9,7 +9,8 @@ const initialState = {
 
 export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI) => {
 	try {
-		const data = await axios.get("http://localhost:3001/board", payload);
+		// const data = await axios.get("http://localhost:3001/board", payload);
+		const data = await axios.get("http://localhost:3001/board");
 		return thunkAPI.fulfillWithValue(data.data);
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error);
@@ -45,7 +46,7 @@ export const boardSlice = createSlice({
 		},
 		[__getBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.data = action.payload;
+			state.board = action.payload;
 		},
 		[__getBoard.rejected]: (state, action) => {
 			state.isLoading = false;

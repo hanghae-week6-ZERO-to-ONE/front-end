@@ -1,16 +1,17 @@
 import zerocider from "../../images/zerocider.png";
 import styled from "styled-components";
 
-function UserContentImg() {
+function UserContentImg({ board }) {
+	console.log(board);
 	return (
 		<>
 			<ImgWrap>
-				<img src={zerocider} alt="zerocider" />
+				<img src={board.image ? board.image : undefined} alt="zerocider" />
 			</ImgWrap>
 			<TextWrap>
-				<div>상품명</div>
-				<div>제품설명</div>
-				<div>❤좋아요 30개</div>
+				<div>{board.title}</div>
+				<div>{board.title}</div>
+				<div>❤좋아요 {board.id}개</div>
 			</TextWrap>
 		</>
 	);
