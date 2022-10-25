@@ -14,24 +14,6 @@ const CategoryImg = () => {
 						<p>펩시 제로</p>
 					</li>
 				</Link>
-				<Link to={"/detail/:id"}>
-					<li>
-						<img
-							src="https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/3842779007/B.jpg?500000000"
-							alt=""
-						/>
-						<p>펩시 제로</p>
-					</li>
-				</Link>
-				<Link to={"/detail/:id"}>
-					<li>
-						<img
-							src="https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/3842779007/B.jpg?500000000"
-							alt=""
-						/>
-						<p>펩시 제로</p>
-					</li>
-				</Link>
 			</ul>
 		</CategoryImgWrap>
 	);

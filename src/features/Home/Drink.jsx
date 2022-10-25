@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Drink = ({ board }) => {
 	const navigate = useNavigate();
+
 	return (
 		<DrinkWrap
 			onClick={() => {
@@ -14,11 +14,12 @@ const Drink = ({ board }) => {
 						title: board.title,
 						content: board.content,
 						image: board.image,
+						heartNum: board.heartNum,
 					},
 				});
 			}}
 		>
-			<img src={board.image} alt="" />
+			<img src={board.image} alt={board.title} />
 			<p>{board.title}</p>
 		</DrinkWrap>
 	);

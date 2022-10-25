@@ -4,8 +4,6 @@ import styled from "styled-components";
 const Logout = ({}) => {
 	const handleLogout = e => {
 		e.preventDefault();
-
-		console.log("handleLogout");
 	};
 
 	return (
