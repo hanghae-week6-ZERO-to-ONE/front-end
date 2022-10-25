@@ -11,7 +11,7 @@ function UploadContent() {
 		//1. 이미지 없을 때 처리
 		//2. 이미지 용량 제한
 		//3. 이미지만 업로드 가능하게 처리하는 법
-		console.log(e.target.files[0]);
+
 		const image = URL.createObjectURL(e.target.files[0]);
 
 		setImage(image);
@@ -21,7 +21,6 @@ function UploadContent() {
 		const { name, value } = e.target;
 
 		setData({ ...data, [name]: value });
-		console.log(data);
 	};
 
 	const submitHandler = e => {
@@ -29,16 +28,16 @@ function UploadContent() {
 
 		const formData = new FormData();
 
-		Object.entries(data).forEach(([key, value]) => {
-			formData.append(key, value);
-		});
+		// Object.entries(data).forEach(([key, value]) => {
+		// 	formData.append(key, value);
+		// });
 
-		//formData.append("image", data.image);
-		//formData.append("title", data.title);
-		//formData.append("category", data.category);
-		//formData.append("desc", data.desc);
+		formData.append("image", image);
+		formData.append("title", data.title);
+		formData.append("category", data.category);
+		formData.append("desc", data.desc);
 
-		fileUploadApi(formData);
+		// fileUploadApi(formData);
 	};
 
 	return (

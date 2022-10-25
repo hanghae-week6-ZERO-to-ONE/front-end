@@ -8,7 +8,8 @@ function UserContentImg() {
 				<img src={zerocider} alt="zerocider" />
 			</ImgWrap>
 			<TextWrap>
-				<div>상품명 제품설명</div>
+				<div>상품명</div>
+				<div>제품설명</div>
 				<div>❤좋아요 30개</div>
 			</TextWrap>
 		</>
