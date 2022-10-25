@@ -17,13 +17,14 @@ const Category = () => {
 					<StLink to="/upload">업로드</StLink>
 				</BtnWrap>
 				<CategoryUl>
-					{board
-						?.filter(data => data.category === `${params.id}`)
-						.map(data => (
-							<>
-								<CategoryImgWrap key={data.id} board={data} />
-							</>
-						))}
+					{board &&
+						board
+							?.filter(data => data.category === `${params.id}`)
+							.map(data => (
+								<>
+									<CategoryImgWrap key={data.id} board={data} />
+								</>
+							))}
 				</CategoryUl>
 			</Layout>
 		</>

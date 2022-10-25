@@ -28,7 +28,7 @@ export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payloa
 export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thunkAPI) => {
 	// console.log(payload);
 	try {
-		const { data } = await axios.put(`http://localhost:3001/board/${payload}`, payload);
+		const { data } = await axios.put(`http://localhost:3001/board/${payload.id}`, payload);
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -60,7 +60,7 @@ export const boardSlice = createSlice({
 		},
 		[__updateBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.post = action.payload;
+			state.data = action.payload;
 		},
 		[__updateBoard.rejected]: (state, action) => {
 			state.isLoading = false;

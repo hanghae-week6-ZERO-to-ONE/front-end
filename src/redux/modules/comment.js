@@ -103,8 +103,11 @@ export const commentSlice = createSlice({
 		},
 		[__updateComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			const target = state.comments.data.findIndex(comment => comment.id === action.payload.id);
-			state.comment.data.splice(target, 1, action.payload);
+			state.data = action.payload;
+		},
+		[__updateComment.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
 		},
 	},
 });

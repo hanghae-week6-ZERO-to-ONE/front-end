@@ -19,33 +19,36 @@ const DrinkListWrap = () => {
 				<article>
 					<h2>최신</h2>
 					<ul>
-						{board?.map(data => (
-							<>
-								<Drink key={data.id} board={data} />
-							</>
-						))}
+						{board &&
+							board?.map(data => (
+								<>
+									<Drink key={data.id} board={data} />
+								</>
+							))}
 					</ul>
 				</article>
-				{categoryArray.map((category, index) => {
-					return (
-						<>
-							<article key={index}>
-								<h2>
-									<Link to={`/category/${category}`}>{category}</Link>
-								</h2>
-								<ul>
-									{board
-										?.filter(data => data.category === `${category}`)
-										.map(data => (
-											<>
-												<Drink key={data.id} board={data} />
-											</>
-										))}
-								</ul>
-							</article>
-						</>
-					);
-				})}
+				{categoryArray &&
+					categoryArray.map((category, index) => {
+						return (
+							<>
+								<article key={index}>
+									<h2>
+										<Link to={`/category/${category}`}>{category}</Link>
+									</h2>
+									<ul>
+										{board &&
+											board
+												?.filter(data => data.category === `${category}`)
+												.map(data => (
+													<>
+														<Drink key={data.id} board={data} />
+													</>
+												))}
+									</ul>
+								</article>
+							</>
+						);
+					})}
 			</DrinkWrap>
 		</>
 	);
@@ -64,7 +67,8 @@ const DrinkWrap = styled.section`
 	}
 	ul {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
+		gap: 25px;
 	}
 	li {
 		width: 200px;
