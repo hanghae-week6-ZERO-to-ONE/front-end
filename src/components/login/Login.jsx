@@ -1,14 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
+import { __loginDB } from "../../redux/modules/login";
 
 const Login = ({}) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleLogin = e => {
 		e.preventDefault();
-		// 1. dispatch(__loginDB({name: string, password: string}))
+		dispatch(__loginDB({ name: "jae1234", password: "123asd4" }));
 	};
 
 	const handleButton2 = e => {

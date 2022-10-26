@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import boards from "../modules/board";
-import comment from "../modules/comment";
+import login from "../modules/login";
+import mypage from "../modules/mypage";
 const store = configureStore({
 	reducer: {
 		boards,
-		comment,
+		login,
+		mypage,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({

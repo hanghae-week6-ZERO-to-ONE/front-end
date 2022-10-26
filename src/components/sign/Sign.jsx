@@ -3,23 +3,61 @@ import styled from "styled-components";
 import person from "../../images/sign/person.svg";
 import lock from "../../images/sign/lock.svg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Sign = ({}) => {
 	const navigate = useNavigate();
 
 	// 회원가입하기
-	const handleSign = e => {
+	const handleSign = async e => {
 		e.preventDefault();
 		// 1. 이메일, 비번 맞나 확인하기
 		// 2. axios로 보내기
 		//
 
+		// const yesJson = JSON.stringify({ name: "jae123", password: "123asd" });
+		const yes = { name: "jae1234", password: "123asd4" };
+		// Fetch 사용
+		// const response = await fetch(`http://3.38.153.4:8080/member/signup`, {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	body: JSON.stringify(yes),
+		// })
+		// 	.then(response => console.log(response))
+		// 	.catch(error => console.log(error));
+
+		// Axiox 사용
+		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/signup`, yes);
+		console.log(response);
+
+		// const yes = await fetch(`${process.env.REACT_APP_LOGIN_URL}/member/signup`, {
+		// 	method: "POST",
+		// 	body: yesJson,
+		// });
+
+		// console.log(yes);
+		// , {
+		// 	withCredentials: true, // 쿠키 cors 통신 설정
+		// }
+
 		navigate(`/`);
 	};
 
-	const checkOverlap = e => {
+	const checkOverlap = async e => {
 		e.preventDefault();
+
 		// 1. axios로 아이디 보내기
+
+		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/check-id`, {
+			name: "jae12345",
+		});
+
+		// const yes = await fetch("/member/check-id", {
+		// 	method: "POST",
+		// 	body: "jae123",
+		// });
 
 		// 2. success 가 true, false 로
 		// 메세지 띄우기
