@@ -18,7 +18,8 @@ export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI)
 
 export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payload, thunkAPI) => {
 	try {
-		axios.delete(`http://3.38.153.4:8080/boards/${payload}`);
+		axios.delete(`http://3.38.153.4:8080/boards/${payload.id}`);
+
 		return thunkAPI.fulfillWithValue(payload);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -28,6 +29,7 @@ export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payloa
 export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thunkAPI) => {
 	try {
 		const { data } = await axios.put(`http://3.38.153.4:8080/boards/${payload.id}`, payload);
+		console.log(data);
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);

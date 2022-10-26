@@ -108,8 +108,8 @@ const Detail = () => {
 								<>
 									<EditDelete>
 										<div>
-											<input type="text" onChange={titleHandler} value={editTitle} />
-											<input type="text" onChange={contentHandler} value={editContent} />
+											<input type="text" onChange={titleHandler} value={editTitle || ""} />
+											<input type="text" onChange={contentHandler} value={editContent || ""} />
 											<button onClick={editHandler}>
 												<strong>수정</strong>
 											</button>

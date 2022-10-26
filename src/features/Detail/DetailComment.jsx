@@ -8,22 +8,21 @@ import { __getComment, __addComment } from "../../redux/modules/comment";
 const DetailComment = () => {
 	const dispatch = useDispatch();
 	const id = useParams();
-	const comments = useSelector(state => state.comment.comment.data);
-	console.log(comments);
+	const comments = useSelector(state => state.comment.comment.commentResponseDtoList);
+	console.log(id);
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
 
 	useEffect(() => {
 		dispatch(__getComment(id));
 	}, [dispatch, clicked]);
-	// console.log(comment);
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (inputForm) {
 			dispatch(
 				__addComment({
-					id: id,
+					id,
 					content: inputForm,
 				})
 			);
@@ -51,7 +50,7 @@ const DetailComment = () => {
 					</button>
 				</div>
 			</CommentWriteWrap>
-			{/* {comments &&
+			{comments &&
 				comments?.map((com, idx) => {
 					return (
 						<DetailCommentContent
@@ -61,7 +60,7 @@ const DetailComment = () => {
 							key={idx}
 						/>
 					);
-				})} */}
+				})}
 		</DetailCommentWrap>
 	);
 };
