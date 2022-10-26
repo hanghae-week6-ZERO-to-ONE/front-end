@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getBoard } from "../../redux/modules/board";
+import { __getBoard, __getBoardCategory } from "../../redux/modules/board";
 import { Link } from "react-router-dom";
 import Drink from "./Drink";
 
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
 	const boards = useSelector(state => state.boards.boards);
+	const boards_category = useSelector(state => state.boards);
 	console.log(boards);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	dispatch(__getBoardCategory());
+	// }, [dispatch]);
 	const categoryArray = ["프로틴음료", "제로슈가", "건강음료", "이온음료"];
 	return (
 		<>

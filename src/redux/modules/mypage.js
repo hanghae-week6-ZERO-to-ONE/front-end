@@ -6,7 +6,6 @@ const initialState = { isLoading: false, board: [], error: null };
 // 이미지, 패스워드 수정
 export const __updateMypageImg = createAsyncThunk("mypage", async (payload, thunkAPI) => {
 	try {
-		console.log(payload);
 		const data = await axios.patch(`http://localhost:3001/mypage/${payload.id}`, payload.formData);
 		// console.log(data);
 		return thunkAPI.fulfillWithValue(data);
