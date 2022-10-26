@@ -21,6 +21,7 @@ const Logout = ({}) => {
 			// 	}
 			// );
 			window.localStorage.clear();
+			window.location.reload();
 		} else if (contest === false) {
 			return;
 		}

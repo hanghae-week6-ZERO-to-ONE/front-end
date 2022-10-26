@@ -16,7 +16,7 @@ const Sign = ({}) => {
 		//
 
 		// const yesJson = JSON.stringify({ name: "jae123", password: "123asd" });
-		const yes = { name: "jae1234", password: "123asd4" };
+		const yes = { name: "jae12", password: "123asd4@" };
 		// Fetch 사용
 		// const response = await fetch(`http://3.38.153.4:8080/member/signup`, {
 		// 	method: "POST",
