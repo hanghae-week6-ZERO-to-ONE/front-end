@@ -90,5 +90,19 @@
 			"content": "수정",
 			"id": 11
 		}
+	],
+	"mypage": [
+		{
+			"id": 1,
+			"name": "seokwon123",
+			"password": "123123",
+			"image": ""
+		},
+		{
+			"id": 2,
+			"name": "jaesin123",
+			"password": "123123",
+			"image": ""
+		}
 	]
 }

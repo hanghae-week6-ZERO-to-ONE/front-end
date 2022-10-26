@@ -2,7 +2,6 @@ import zerocider from "../../images/zerocider.png";
 import styled from "styled-components";
 
 function UserContentImg({ board }) {
-	console.log(board);
 	return (
 		<>
 			<ImgWrap>
@@ -21,25 +20,12 @@ export default UserContentImg;
 const ImgWrap = styled.div`
 	box-sizing: border-box;
 
-	position: absolute;
-	width: 144px;
-	height: 140px;
-	left: 459px;
-	top: 1051px;
-
-	background: url(image);
 	border: 1px solid #000000;
 	border-radius: 95px;
 `;
 
 const TextWrap = styled.div`
 	box-sizing: border-box;
-
-	position: absolute;
-	width: 736px;
-	height: 145px;
-	left: 691px;
-	top: 1043px;
 
 	background: #ffffff;
 	border: 1px solid #000000;

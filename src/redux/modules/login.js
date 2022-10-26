@@ -25,8 +25,8 @@ export const __loginDB = createAsyncThunk("user/loginDB", async (data, thunkAPI)
 	}
 });
 
-const userSlice = createSlice({
-	name: "user",
+const loginSlice = createSlice({
+	name: "login",
 	initialState,
 	reducers: {},
 	extraReducers: {
@@ -41,4 +41,4 @@ const userSlice = createSlice({
 	},
 });
 
-export default userSlice.reducer;
+export default loginSlice.reducer;

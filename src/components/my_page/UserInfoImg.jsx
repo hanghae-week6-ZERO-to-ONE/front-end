@@ -2,20 +2,25 @@ import mask from "../../images/mask.png";
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { __updateMypageImg } from "../../redux/modules/mypage";
 // import Upload from "../pages/upload/Upload";
 
 function UserInfoImg() {
 	const selectFile = useRef("");
-	const [image, setImage] = useState(null);
+	const [previewImage, setPreviewImage] = useState(null);
+	const [imageToSend, setImageToSend] = useState(null);
 	const [data, setData] = useState({});
+
+	const dispatch = useDispatch();
+
 	const fileUpload = e => {
 		//1. 이미지 없을 때 처리
 		//2. 이미지 용량 제한
 		//3. 이미지만 업로드 가능하게 처리하는 법
-		console.log(e.target.files[0]);
-		const image = URL.createObjectURL(e.target.files[0]);
 
-		setImage(image);
+		setImageToSend(e.target.files[0]);
+		setPreviewImage(URL.createObjectURL(e.target.files[0]));
 	};
 
 	const onChangeHandler = e => {
@@ -29,12 +34,10 @@ function UserInfoImg() {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("image", image);
+		formData.append("image", imageToSend);
 		formData.append("title", data.username);
 
-		for (const value of formData.values()) {
-			console.log(value);
-		}
+		dispatch(__updateMypageImg({ formData: formData, id: 1 }));
 	};
 
 	return (
@@ -52,7 +55,7 @@ function UserInfoImg() {
 						onChange={fileUpload}
 					/>
 
-					<ImagePreview src={image} />
+					<ImagePreview src={previewImage} />
 				</ImageLayout>
 
 				<UserName>
