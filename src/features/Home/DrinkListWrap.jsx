@@ -7,7 +7,7 @@ import Drink from "./Drink";
 
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
-	const boards = useSelector(state => state.boards.boards.data);
+	const boards = useSelector(state => state.boards.boards);
 	console.log(boards);
 	useEffect(() => {
 		dispatch(__getBoard());

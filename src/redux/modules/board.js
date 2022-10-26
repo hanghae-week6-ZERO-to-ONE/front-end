@@ -10,7 +10,7 @@ const initialState = {
 export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI) => {
 	try {
 		const data = await axios.get("http://3.38.153.4:8080/boards/recent", payload);
-		return thunkAPI.fulfillWithValue(data.data);
+		return thunkAPI.fulfillWithValue(data.data.data);
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error);
 	}
