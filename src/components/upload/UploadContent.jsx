@@ -10,7 +10,6 @@ function UploadContent() {
 	const [data, setData] = useState({});
 	const onChangeHandler = e => {
 		const { name, value } = e.target;
-
 		setData({ ...data, [name]: value });
 		console.log("데이터:", data);
 	};
@@ -21,7 +20,7 @@ function UploadContent() {
 		//3. 이미지만 업로드 가능하게 처리하는 법
 		console.log("파일:", e.target.files[0]);
 		const image = URL.createObjectURL(e.target.files[0]);
-		dispatch(__addTodos(data));
+		// dispatch(__addTodos(data));
 		setImage(image);
 	};
 
@@ -46,21 +45,21 @@ function UploadContent() {
 		// 	formData.append(key, value);
 		// });
 
-		// 이걸 합친게 바로 위 코드임
+		// 이걸 합친게 바로 위 코드임);
+		formData.append(1, data.desc);
 		formData.append("image", image);
 		formData.append("title", data.title);
 		formData.append("category", data.category);
-		formData.append("desc", data.desc);
 
 		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함
-		// let entries = formData.entries();
-		// for (const pair of entries) {
-		// 	console.log(pair[0] + ", " + pair[1]);
-		// }
-
-		for (const value of formData.values()) {
-			console.log("폼데이터:", value);
+		let entries = formData.entries();
+		for (const pair of entries) {
+			console.log(pair[0] + ", " + pair[1]);
 		}
+
+		// for (const value of formData.values()) {
+		// 	console.log("폼데이터:", value);
+		// }
 
 		// fileUploadApi(formData);
 	};
