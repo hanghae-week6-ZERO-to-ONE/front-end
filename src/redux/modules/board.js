@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-	board: [],
+	boards: [],
 	isLoading: false,
 	error: null,
 };
 
 export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI) => {
 	try {
-		// const data = await axios.get("http://localhost:3001/board", payload);
-		const data = await axios.get("http://localhost:3001/board");
+		const data = await axios.get("http://3.38.153.4:8080/boards/recent", payload);
 		return thunkAPI.fulfillWithValue(data.data);
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error);
@@ -19,7 +18,7 @@ export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI)
 
 export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payload, thunkAPI) => {
 	try {
-		axios.delete(`http://localhost:3001/board/${payload}`);
+		axios.delete(`http://localhost:3001/boards/${payload}`);
 		return thunkAPI.fulfillWithValue(payload);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -27,9 +26,8 @@ export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payloa
 });
 
 export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thunkAPI) => {
-	// console.log(payload);
 	try {
-		const { data } = await axios.put(`http://localhost:3001/board/${payload}`, payload);
+		const { data } = await axios.put(`http://localhost:3001/boards/${payload.id}`, payload);
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -37,7 +35,7 @@ export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thu
 });
 
 export const boardSlice = createSlice({
-	name: "board",
+	name: "boards",
 	initialState,
 	reducers: {},
 	extraReducers: {
@@ -46,7 +44,7 @@ export const boardSlice = createSlice({
 		},
 		[__getBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.board = action.payload;
+			state.boards = action.payload;
 		},
 		[__getBoard.rejected]: (state, action) => {
 			state.isLoading = false;
@@ -61,7 +59,7 @@ export const boardSlice = createSlice({
 		},
 		[__updateBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.post = action.payload;
+			state.boards.push(action.payload);
 		},
 		[__updateBoard.rejected]: (state, action) => {
 			state.isLoading = false;
@@ -70,5 +68,5 @@ export const boardSlice = createSlice({
 	},
 });
 
-export const {} = boardSlice.actions;
+// export const {} = boardSlice.actions;
 export default boardSlice.reducer;

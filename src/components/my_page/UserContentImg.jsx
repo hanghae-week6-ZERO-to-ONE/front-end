@@ -1,16 +1,16 @@
 import zerocider from "../../images/zerocider.png";
 import styled from "styled-components";
 
-function UserContentImg({ board }) {
+function UserContentImg({ boards }) {
 	return (
 		<>
 			<ImgWrap>
-				<img src={board.image ? board.image : undefined} alt="zerocider" />
+				<img src={boards.image ? boards.image : undefined} alt="zerocider" />
 			</ImgWrap>
 			<TextWrap>
-				<div>{board.title}</div>
-				<div>{board.title}</div>
-				<div>❤좋아요 {board.id}개</div>
+				<div>{boards.title}</div>
+				<div>{boards.title}</div>
+				<div>❤좋아요 {boards.id}개</div>
 			</TextWrap>
 		</>
 	);

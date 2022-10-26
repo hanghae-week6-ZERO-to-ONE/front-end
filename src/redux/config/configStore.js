@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import board from "../modules/board";
+import boards from "../modules/board";
 import login from "../modules/login";
 import mypage from "../modules/mypage";
 const store = configureStore({
 	reducer: {
-		board,
+		boards,
 		login,
 		mypage,
 	},
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 });
 
 export default store;

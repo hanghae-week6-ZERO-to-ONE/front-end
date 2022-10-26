@@ -6,8 +6,9 @@ import UserContentImg from "../my_page/UserContentImg";
 // import SettingUserThumbnail from "./OnImgChange";
 
 const UserInfo = () => {
-	const yes = useSelector(state => state.board.board);
 	const dispatch = useDispatch();
+	const yes = useSelector(state => state.boards.boards.data);
+	console.log("yes", yes);
 
 	useEffect(() => {
 		dispatch(__getBoard());
@@ -18,9 +19,10 @@ const UserInfo = () => {
 			<UserContentCmt />
 			{/* <SettingUserThumbnail /> */}
 
-			{yes.map((val, index) => {
-				return <UserContentImg key={index} board={val} />;
-			})}
+			{yes &&
+				yes.map((val, index) => {
+					return <UserContentImg key={index} boards={val} />;
+				})}
 		</>
 	);
 };
