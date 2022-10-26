@@ -8,19 +8,39 @@ import Detail from "../pages/detail/Detail";
 import Home from "../pages/home/Home";
 import Category from "../pages/category/Category";
 import SignPage from "../pages/sign/SignPage";
+import { useEffect, useState } from "react";
+
+import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
+	const [login, setLogin] = useState(false);
+
+	useEffect(() => {
+		const token = localStorage.getItem("authorization");
+
+		if (token) {
+			console.log("loggedin");
+			setLogin(true);
+		} else {
+			console.log("loggedout");
+			setLogin(false);
+		}
+	}, []);
+
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Header></Header>}>
+				<Route path="/" element={<Header />}>
 					<Route path="" element={<Home />} />
 					<Route path="category/:id" element={<Category />} />
 					<Route path="detail" element={<Detail />}>
 						<Route path=":id" element={<Detail />} />
 					</Route>
-					<Route path="my_page" element={<MyPage />} />
-					<Route path="upload" element={<Upload />} />
+					<Route path="" element={<PrivateRoute login={login} />}>
+						<Route path="my_page" element={<MyPage />} />
+						<Route path="upload" element={<Upload />} />
+					</Route>
+
 					<Route path="sign" element={<SignPage />} />
 				</Route>
 				<Route path="login" element={<LoginPage />} />

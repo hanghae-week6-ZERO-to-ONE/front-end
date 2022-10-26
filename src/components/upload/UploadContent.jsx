@@ -51,7 +51,7 @@ function UploadContent() {
 		formData.append("category", data.category);
 		formData.append("content", data.content);
 
-		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함
+		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함q
 		let entries = formData.entries();
 		for (const pair of entries) {
 			console.log(pair[0] + ", " + pair[1]);
