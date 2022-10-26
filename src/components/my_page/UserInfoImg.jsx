@@ -31,7 +31,6 @@ function UserInfoImg() {
 		const formData = new FormData();
 		formData.append("image", image);
 		formData.append("title", data.username);
-		
 
 		for (const value of formData.values()) {
 			console.log(value);
@@ -90,7 +89,7 @@ const ImageLayout = styled.div`
 `;
 
 const ImageLabel = styled.label`
-	posistion: absolute;
+	position: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
