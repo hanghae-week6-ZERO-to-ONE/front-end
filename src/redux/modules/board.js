@@ -18,8 +18,8 @@ export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI)
 
 export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payload, thunkAPI) => {
 	try {
-		axios.delete(`http://3.38.153.4:8080/boards/${payload.id}`);
-
+		axios.delete(`http://3.38.153.4:8080/boards/${payload.id}`, payload);
+		console.log(payload);
 		return thunkAPI.fulfillWithValue(payload);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -29,7 +29,6 @@ export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payloa
 export const __updateBoard = createAsyncThunk("updateBoard", async (payload, thunkAPI) => {
 	try {
 		const { data } = await axios.put(`http://3.38.153.4:8080/boards/${payload.id}`, payload);
-		console.log(data);
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -52,10 +51,17 @@ export const boardSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 		},
-		[__getBoardDelete.fulfilled]: () => {},
-		[__getBoardDelete.rejected]: () => {},
-		[__getBoardDelete.pending]: () => {},
+		[__getBoardDelete.pending]: state => {
+			state.isLoading = true;
+		},
 
+		[__getBoardDelete.fulfilled]: (state, action) => {
+			state.boards = state.boards.filter(val => val.id !== action.payload);
+		},
+		[__getBoardDelete.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
 		[__updateBoard.pending]: state => {
 			state.isLoading = true;
 		},

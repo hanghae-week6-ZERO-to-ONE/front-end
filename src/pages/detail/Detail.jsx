@@ -190,7 +190,7 @@ const EditDelete = styled.div`
 	}
 `;
 const Content = styled.p`
-	width: 700px;
+	width: 600px;
 	height: 250px;
 `;
 const LikeWrap = styled.p`

@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import userImage from "../../images/userImage.png";
 import { useState, useEffect } from "react";
@@ -9,23 +10,20 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 	const dispatch = useDispatch();
 	const [isEdit, setIsEdit] = useState(false);
 	const [editText, setEditText] = useState(comments.content);
-	const [username] = useState(comments.name);
+	const [writer] = useState(comments.writer);
+	const id = useParams();
 
 	useEffect(() => {
-		dispatch(__getComment());
+		dispatch(__getComment(id));
 	}, [dispatch]);
+
 	const onDeleteHandler = () => {
 		dispatch(__deleteComment(comments.id));
 		setClicked(!clicked);
 	};
 	const editHandler = () => {
-		dispatch(__updateComment({ ...comments, content: editText, username: username }));
+		dispatch(__updateComment({ ...comments, content: editText, writer: writer }));
 		setIsEdit(!isEdit);
-		// navigate(`/detail/${id}`, {
-		// 	state: {
-		// 		comment,
-		// 	},
-		// });
 	};
 	const edit = e => {
 		setEditText(e.target.value);
@@ -37,7 +35,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 					<CommentWrap>
 						<div>
 							<img src={userImage} alt="userImage" />
-							<span>{comments.name}</span>
+							<span>{comments.writer}</span>
 						</div>
 						<div>
 							<input placeholder="댓글입력" type="text" value={editText} onChange={edit} />
@@ -50,7 +48,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 				<CommentWrap>
 					<div>
 						<img src={userImage} alt="userImage" />
-						<span>{comments.name}</span>
+						<span>{comments.writer}</span>
 					</div>
 					<div>
 						<Content>{comments.content}</Content>
@@ -61,6 +59,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 							<button
 								onClick={() => {
 									const result = window.confirm("댓글을 지울까요?");
+
 									if (result) {
 										return onDeleteHandler();
 									} else {
@@ -105,6 +104,7 @@ const CommentWrap = styled.article`
 	div {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		align-items: center;
 		margin-left: 20px;
 		img {
@@ -115,11 +115,11 @@ const CommentWrap = styled.article`
 		}
 	}
 	input {
-		width: 750px;
+		width: 650px;
 		margin-right: 8px;
 	}
 `;
 const ButtonWrap = styled.div``;
 const Content = styled.span`
-	width: 700px;
+	width: 500px;
 `;

@@ -44,7 +44,6 @@ const mypageSlice = createSlice({
 		},
 		[__getMypageBoard.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			console.log(action.payload);
 			state.board = action.payload;
 		},
 		[__getMypageBoard.rejected]: (state, action) => {

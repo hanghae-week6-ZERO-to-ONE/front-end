@@ -8,21 +8,20 @@ import { __getComment, __addComment } from "../../redux/modules/comment";
 const DetailComment = () => {
 	const dispatch = useDispatch();
 	const id = useParams();
-	const comments = useSelector(state => state.comment.comment.commentResponseDtoList);
-	console.log(id);
+	const comments = useSelector(state => state.comment.comment);
+	// console.log(comments);
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
 
 	useEffect(() => {
 		dispatch(__getComment(id));
-	}, [dispatch, clicked]);
+	}, [dispatch]);
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (inputForm) {
 			dispatch(
 				__addComment({
-					id,
 					content: inputForm,
 				})
 			);
