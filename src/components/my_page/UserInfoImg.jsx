@@ -8,8 +8,8 @@ import { __updateMypageImg } from "../../redux/modules/mypage";
 
 function UserInfoImg() {
 	const selectFile = useRef("");
-	const [previewImage, setPreviewImage] = useState(null);
-	const [imageToSend, setImageToSend] = useState(null);
+	const [imageToEdit, setImageToEdit] = useState(null);
+	const [editpreview, setEditpreview] = useState(null);
 	const [data, setData] = useState({});
 
 	const dispatch = useDispatch();
@@ -19,8 +19,8 @@ function UserInfoImg() {
 		//2. 이미지 용량 제한
 		//3. 이미지만 업로드 가능하게 처리하는 법
 
-		setImageToSend(e.target.files[0]);
-		setPreviewImage(URL.createObjectURL(e.target.files[0]));
+		setImageToEdit(e.target.files[0]);
+		setEditpreview(URL.createObjectURL(e.target.files[0]));
 	};
 
 	const onChangeHandler = e => {
@@ -33,11 +33,35 @@ function UserInfoImg() {
 	const submitHandler = e => {
 		e.preventDefault();
 
-		const formData = new FormData();
-		formData.append("image", imageToSend);
-		formData.append("title", data.username);
+		const accessToken = localStorage.getItem("accessToken");
+		// const refreshToken = localStorage.getItem("refreshToken");
 
-		dispatch(__updateMypageImg({ formData: formData, id: 1 }));
+		const formData = new FormData();
+		formData.append("image", imageToEdit);
+		// formData.append("title", data.username); //📌
+
+		axios
+			.put("http://3.38.153.4:8080/mypage/image", formData, {
+				headers: {
+					Authorization: accessToken,
+					// "Refresh-Token": refreshToken,
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then(function a(response) {
+				alert("게시되었습니다.");
+				window.location.replace("/");
+			})
+			.catch(function (error) {
+				console.log(error.response);
+			});
+
+		let entries = formData.entries();
+		for (const pair of entries) {
+			console.log(pair[0] + ", " + pair[1]);
+		}
+
+		// dispatch(__updateMypageImg({ formData: formData, id: 1 }));
 	};
 
 	return (
@@ -55,18 +79,9 @@ function UserInfoImg() {
 						onChange={fileUpload}
 					/>
 
-					<ImagePreview src={previewImage} />
+					<ImagePreview src={editpreview} />
 				</ImageLayout>
-
-				<UserName>
-					<input
-						type="text"
-						name="username"
-						placeholder="유저 이름"
-						onChange={onChangeHandler}
-					></input>
-				</UserName>
-				<button type="submit">업로드</button>
+				<button type="submit">프로필 사진 수정</button>
 			</ImgWrap>
 		</>
 	);

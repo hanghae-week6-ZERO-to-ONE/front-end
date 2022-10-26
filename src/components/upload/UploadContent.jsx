@@ -5,8 +5,11 @@ import styled from "styled-components";
 import { fileUploadApi } from "../../axios";
 import { __addTodos } from "../../redux/modules/_todoSlice";
 
+const DATA_URL = "http://15.164.234.179/";
+
 function UploadContent() {
-	const [image, setImage] = useState(null);
+	const [imageToUpload, setImageToUpload] = useState(null);
+	const [uploadpreview, setUploadpreview] = useState(null);
 	const dispatch = useDispatch();
 	const [data, setData] = useState({});
 	const onChangeHandler = e => {
@@ -20,65 +23,60 @@ function UploadContent() {
 		//2. 이미지 용량 제한
 		//3. 이미지만 업로드 가능하게 처리하는 법
 		console.log("파일:", e.target.files[0]);
-		const image = e.target.files[0];
+		setImageToUpload(e.target.files[0]);
 
 		//image URL코드
-		// const image = URL.createObjectURL(e.target.files[0]);
+		setUploadpreview(URL.createObjectURL(e.target.files[0]));
 
 		// dispatch(__addTodos(data));
-		setImage(image);
+		// setImage(image);
 	};
 
 	// const onClickHandler = e => {
-	// 	e.preventDefault();
-	// 	dispatch(__addTodos(data));
-	// 	setData({});
+	// e.preventDefault();
+	// dispatch(__addTodos(data));
+	// setData({});
 	// };
 
 	const onClickHandler = e => {
 		e.preventDefault();
+
+		const accessToken = localStorage.getItem("accessToken");
+		const refreshToken = localStorage.getItem("refreshToken");
 
 		const formData = new FormData();
 
 		// formData.getAll();
 
 		// for (let value of formData.values()) {
-		// 	console.log(value);
+		// console.log(value);
 		//
 
 		// Object.entries(data).forEach(([key, value]) => {
-		// 	formData.append(key, value);
+		// formData.append(key, value);
 		// });
 
 		// 이걸 합친게 바로 위 코드임
-		formData.append("image", image);
+		formData.append("image", imageToUpload);
 		formData.append("title", data.title);
 		formData.append("category", data.category);
 		formData.append("content", data.content);
 
-		// const register = (payload) => {
-		// 	//토큰은 로컬스토리지에 전달하기
-		// 	const accessToken = localStorage.getItem(“accessToken”);
-		// 	const refreshToken = localStorage.getItem(“refreshToken”);
-		// 	//인풋데이터들 폼데이터로 변환하기
-
-		//   //폼데이터 통신보내기 폼데이터 형식지정하고 헤더에 토큰도 같이 보내기
-		// 	axios
-		// 	  .post(`${BASE_URL}/api/boards/create`, formData, {
-		// 		headers: {
-		// 		  Authorization: accessToken,
-		// 		  “Refresh-Token”: refreshToken,
-		// 		  “Content-Type”: “multipart/form-data”,
-		// 		},
-		// 	  })
-		// 	  .then(function a(response) {
-		// 		alert(“게시되었습니다.“);
-		// 		window.location.replace(“/”);
-		// 	  })
-		// 	  .catch(function (error) {
-		// 		console.log(error.response);
-		// 	  });
-		//   };
+		axios
+			.post("http://3.38.153.4:8080/boards", formData, {
+				headers: {
+					Authorization: accessToken,
+					// "Refresh-Token": refreshToken,
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then(function a(response) {
+				alert("게시되었습니다.");
+				window.location.replace("/");
+			})
+			.catch(function (error) {
+				console.log(error.response);
+			});
 
 		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함
 		let entries = formData.entries();
@@ -87,7 +85,7 @@ function UploadContent() {
 		}
 
 		// for (const value of formData.values()) {
-		// 	console.log("폼데이터:", value);
+		// console.log("폼데이터:", value);
 		// }
 
 		// fileUploadApi(formData);
@@ -105,7 +103,7 @@ function UploadContent() {
 						accept={"image/*"}
 						onChange={fileUpload}
 					/>
-					<ImagePreview src={image} />
+					<ImagePreview src={uploadpreview} />
 				</ImageLayout>
 
 				<ContentWrap>게시글 업로드</ContentWrap>
@@ -193,24 +191,3 @@ const ImageLabel = styled.label`
 `;
 
 const ImageInput = styled.input``;
-
-// const frm = new FormData();
-// frm.append("title", payload.title);
-// frm.append("content", payload.content);
-// frm.append("file", payload.file);
-// axios
-//   .post("http://15.164.234.179/api/post", frm, {
-//     headers: {
-//       Authorization: accessToken,
-//       "Refresh-Token": refreshToken,
-//       "Content-Type": "multipart/form-data",
-//     },
-//   })
-//   .then(function a(response) {
-//     alert("게시되었습니다.");
-//     window.location.replace("/");
-//   })
-//   .catch(function (error) {
-//     console.log(error.response);
-//   });
-// };
