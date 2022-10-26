@@ -1,55 +1,54 @@
 {
-	"name": "week5-team-todo-list",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@reduxjs/toolkit": "^1.8.6",
-		"@testing-library/jest-dom": "^5.16.5",
-		"@testing-library/react": "^13.4.0",
-		"@testing-library/user-event": "^13.5.0",
-		"axios": "^1.1.3",
-		"cross-env": "^7.0.3",
-		"global": "^4.4.0",
-		"http-proxy-middleware": "^2.0.6",
-		"json-server": "^0.17.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-redux": "^8.0.4",
-		"react-router-dom": "^6.4.2",
-		"react-scripts": "^5.0.1",
-		"redux-devtools-extension": "^2.13.9",
-		"redux-thunk": "^2.4.1",
-		"styled-components": "^5.3.6",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "node server",
-		"start:dev": "cross-env NODE_PATH=src react-scripts start",
-		"build": "cross-env NODE_PATH=src react-scripts build",
-		"test": "react-scripts test --env=jsdom",
-		"eject": "react-scripts eject",
-		"heroku-postbuild": "cross-env NODE_PATH=src npm run build"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"proxy": "http://3.38.153.4:8080",
-	"devDependencies": {
-		"prettier": "^2.7.1"
-	}
+  "name": "week5-team-todo-list",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.1.3",
+    "cross-env": "^7.0.3",
+    "global": "^4.4.0",
+    "json-server": "^0.17.0",
+    "http-proxy-middleware": "^2.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "^5.0.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.6",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "node server",
+    "start:dev": "cross-env NODE_PATH=src react-scripts start",
+    "build": "cross-env NODE_PATH=src react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
 }

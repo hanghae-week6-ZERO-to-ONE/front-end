@@ -15,6 +15,16 @@ export const __updateMypageImg = createAsyncThunk("mypage", async (payload, thun
 	}
 });
 
+export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI) => {
+	try {
+		// const data = await axios.get("http://localhost:3001/board", payload);
+		const data = await axios.get("http://localhost:3001/board");
+		return thunkAPI.fulfillWithValue(data.data);
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
 const mypageSlice = createSlice({
 	name: "mypage",
 	initialState,
@@ -28,6 +38,17 @@ const mypageSlice = createSlice({
 		// 	state.isLogin = false;
 		// 	state.error = action.payload;
 		// },
+		[__getBoard.pending]: state => {
+			state.isLoading = true;
+		},
+		[__getBoard.fulfilled]: (state, action) => {
+			state.isLoading = false;
+			state.board = action.payload;
+		},
+		[__getBoard.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
 	},
 });
 

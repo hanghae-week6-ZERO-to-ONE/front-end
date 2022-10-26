@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -19,15 +20,19 @@ function UploadContent() {
 		//2. 이미지 용량 제한
 		//3. 이미지만 업로드 가능하게 처리하는 법
 		console.log("파일:", e.target.files[0]);
-		const image = URL.createObjectURL(e.target.files[0]);
+		const image = e.target.files[0];
+
+		//image URL코드
+		// const image = URL.createObjectURL(e.target.files[0]);
+
 		// dispatch(__addTodos(data));
 		setImage(image);
 	};
 
 	// const onClickHandler = e => {
-	// e.preventDefault();
-	// dispatch(__addTodos(data));
-	// setData({});
+	// 	e.preventDefault();
+	// 	dispatch(__addTodos(data));
+	// 	setData({});
 	// };
 
 	const onClickHandler = e => {
@@ -38,11 +43,11 @@ function UploadContent() {
 		// formData.getAll();
 
 		// for (let value of formData.values()) {
-		// console.log(value);
+		// 	console.log(value);
 		//
 
 		// Object.entries(data).forEach(([key, value]) => {
-		// formData.append(key, value);
+		// 	formData.append(key, value);
 		// });
 
 		// 이걸 합친게 바로 위 코드임
@@ -51,14 +56,38 @@ function UploadContent() {
 		formData.append("category", data.category);
 		formData.append("content", data.content);
 
-		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함q
+		// const register = (payload) => {
+		// 	//토큰은 로컬스토리지에 전달하기
+		// 	const accessToken = localStorage.getItem(“accessToken”);
+		// 	const refreshToken = localStorage.getItem(“refreshToken”);
+		// 	//인풋데이터들 폼데이터로 변환하기
+
+		//   //폼데이터 통신보내기 폼데이터 형식지정하고 헤더에 토큰도 같이 보내기
+		// 	axios
+		// 	  .post(`${BASE_URL}/api/boards/create`, formData, {
+		// 		headers: {
+		// 		  Authorization: accessToken,
+		// 		  “Refresh-Token”: refreshToken,
+		// 		  “Content-Type”: “multipart/form-data”,
+		// 		},
+		// 	  })
+		// 	  .then(function a(response) {
+		// 		alert(“게시되었습니다.“);
+		// 		window.location.replace(“/”);
+		// 	  })
+		// 	  .catch(function (error) {
+		// 		console.log(error.response);
+		// 	  });
+		//   };
+
+		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함
 		let entries = formData.entries();
 		for (const pair of entries) {
 			console.log(pair[0] + ", " + pair[1]);
 		}
 
 		// for (const value of formData.values()) {
-		// console.log("폼데이터:", value);
+		// 	console.log("폼데이터:", value);
 		// }
 
 		// fileUploadApi(formData);
@@ -153,7 +182,7 @@ const ImagePreview = styled.img`
 `;
 
 const ImageLabel = styled.label`
-	position: absolute;
+	posistion: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -170,18 +199,18 @@ const ImageInput = styled.input``;
 // frm.append("content", payload.content);
 // frm.append("file", payload.file);
 // axios
-// .post("http://15.164.234.179/api/post", frm, {
-// headers: {
-// Authorization: accessToken,
-// "Refresh-Token": refreshToken,
-// "Content-Type": "multipart/form-data",
-// },
-// })
-// .then(function a(response) {
-// alert("게시되었습니다.");
-// window.location.replace("/");
-// })
-// .catch(function (error) {
-// console.log(error.response);
-// });
+//   .post("http://15.164.234.179/api/post", frm, {
+//     headers: {
+//       Authorization: accessToken,
+//       "Refresh-Token": refreshToken,
+//       "Content-Type": "multipart/form-data",
+//     },
+//   })
+//   .then(function a(response) {
+//     alert("게시되었습니다.");
+//     window.location.replace("/");
+//   })
+//   .catch(function (error) {
+//     console.log(error.response);
+//   });
 // };
