@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import person from "../../images/sign/person.svg";
 import lock from "../../images/sign/lock.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { is_nickname, is_password } from "../../common/logics";
+import { useDispatch } from "react-redux";
+import { __loginDB } from "../../redux/modules/login";
 
 const Sign = ({}) => {
 	const navigate = useNavigate();
+
+	const [idInput, setIdInput] = useState();
+	const [pwInput1, setPwInput1] = useState();
+	const [pwInput2, setPwInput2] = useState();
+
+	const [idInputWrong, setIdInputWrong] = useState(false);
+	const [pwInputWrong, setPwInputWrong] = useState(false);
+
+	const dispatch = useDispatch();
+
+	const handleChange1 = e => {
+		e.preventDefault();
+		setIdInput(e.target.value);
+	};
+
+	const handleChange2 = e => {
+		e.preventDefault();
+		setPwInput1(e.target.value);
+	};
+
+	const handleChange3 = e => {
+		e.preventDefault();
+		setPwInput2(e.target.value);
+	};
 
 	// 회원가입하기
 	const handleSign = async e => {
@@ -15,34 +42,44 @@ const Sign = ({}) => {
 		// 2. axios로 보내기
 		//
 
-		// const yesJson = JSON.stringify({ name: "jae123", password: "123asd" });
-		const yes = { name: "jae12", password: "123asd4@" };
-		// Fetch 사용
-		// const response = await fetch(`http://3.38.153.4:8080/member/signup`, {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify(yes),
-		// })
-		// 	.then(response => console.log(response))
-		// 	.catch(error => console.log(error));
+		if (pwInput1 === pwInput2) {
+			if (is_nickname(idInput) && is_password(pwInput1)) {
+				setIdInputWrong(false);
+				setPwInputWrong(false);
+				// { name: "jae12", password: "123asd4@" }
 
-		// Axiox 사용
-		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/signup`, yes);
-		console.log(response);
+				await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/signup`, {
+					name: idInput,
+					password: pwInput1,
+				});
 
-		// const yes = await fetch(`${process.env.REACT_APP_LOGIN_URL}/member/signup`, {
-		// 	method: "POST",
-		// 	body: yesJson,
-		// });
+				window.confirm("회원가입이 되었습니다!");
+				dispatch(__loginDB({ name: idInput, password: pwInput1 }));
+				navigate(`/`);
+				// dispatch(__loginDB({ name: "jae12", password: "123asd4@" }));
+			} else if (!is_nickname(idInput) && is_password(pwInput1)) {
+				setIdInputWrong(true);
+				setPwInputWrong(false);
+				window.confirm(
+					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
+				);
+			} else if (is_nickname(idInput) && !is_password(pwInput1)) {
+				setIdInputWrong(false);
+				setPwInputWrong(true);
+				window.confirm(
+					"비번이 이상합니다!  1. 영문, 숫자, 특수문자 !@#$%^&* 적어도 하나씩 포함해야됨 2. 8-20자 3. 특수문자만 사용할 수 없음"
+				);
+			} else {
+				setIdInputWrong(true);
+				setPwInputWrong(true);
 
-		// console.log(yes);
-		// , {
-		// 	withCredentials: true, // 쿠키 cors 통신 설정
-		// }
-
-		navigate(`/`);
+				window.confirm(
+					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
+				);
+			}
+		} else {
+			window.confirm("비밀번호가 서로 다릅니다!");
+		}
 	};
 
 	const checkOverlap = async e => {
@@ -79,19 +116,19 @@ const Sign = ({}) => {
 					<IdDiv>
 						<IdInputDiv>
 							<IconImg src={person} />
-							<IdInput placeholder="아이디" />
+							<IdInput type="text" onChange={handleChange1} placeholder="아이디" />
 						</IdInputDiv>
 						<IdButton onClick={checkOverlap}>중복확인</IdButton>
 					</IdDiv>
 
 					<PwDiv>
 						<IconImg src={lock} />
-						<PwInput placeholder="비밀번호" />
+						<PwInput type="password" onChange={handleChange2} placeholder="비밀번호" />
 					</PwDiv>
 
 					<PwAgainDiv>
 						<IconImg src={lock} />
-						<PwAgainInput placeholder="비밀번호 재입력" />
+						<PwAgainInput type="password" onChange={handleChange3} placeholder="비밀번호 재입력" />
 					</PwAgainDiv>
 
 					<ButtonsDiv>

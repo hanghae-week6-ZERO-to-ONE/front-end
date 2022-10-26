@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { is_nickname, is_password } from "../../common/logics";
 import logo from "../../images/logo.png";
 import { __loginDB } from "../../redux/modules/login";
 
@@ -11,15 +12,32 @@ const Login = ({}) => {
 
 	const login = useSelector(state => state.login.isLogin);
 
+	const [idInput, setIdInput] = useState();
+	const [idInputWrong, setIdInputWrong] = useState(false);
+	const [pwInput, setPwInput] = useState();
+	const [pwInputWrong, setPwInputWrong] = useState(false);
+
 	useEffect(() => {
 		if (login) {
 			navigate("/");
 		}
 	}, [login]);
 
+	const handleChange1 = e => {
+		e.preventDefault();
+
+		setIdInput(e.target.value);
+	};
+
+	const handleChange2 = e => {
+		e.preventDefault();
+		setPwInput(e.target.value);
+	};
+
 	const handleLogin = e => {
 		e.preventDefault();
-		dispatch(__loginDB({ name: "jae12", password: "123asd4@" }));
+
+		dispatch(__loginDB({ name: idInput, password: pwInput }));
 	};
 
 	const handleButton2 = e => {
@@ -33,8 +51,8 @@ const Login = ({}) => {
 				<LogoImg src={logo} />
 
 				<IdPasswordDiv>
-					<Input type="text" placeholder="아이디" />
-					<Input type="text" placeholder="비밀번호" />
+					<Input type="text" onChange={handleChange1} placeholder="아이디" />
+					<Input type="text" onChange={handleChange2} placeholder="비밀번호" />
 				</IdPasswordDiv>
 
 				<ButtonsDiv>
