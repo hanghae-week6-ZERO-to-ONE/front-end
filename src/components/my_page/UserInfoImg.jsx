@@ -33,16 +33,35 @@ function UserInfoImg() {
 	const submitHandler = e => {
 		e.preventDefault();
 
+		const accessToken = localStorage.getItem("accessToken");
+		// const refreshToken = localStorage.getItem("refreshToken");
+
 		const formData = new FormData();
 		formData.append("image", imageToEdit);
-		formData.append("title", data.username);
+		// formData.append("title", data.username); //📌
+
+		axios
+			.put("http://3.38.153.4:8080/mypage/image", formData, {
+				headers: {
+					Authorization: accessToken,
+					// "Refresh-Token": refreshToken,
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then(function a(response) {
+				alert("게시되었습니다.");
+				window.location.replace("/");
+			})
+			.catch(function (error) {
+				console.log(error.response);
+			});
 
 		let entries = formData.entries();
 		for (const pair of entries) {
 			console.log(pair[0] + ", " + pair[1]);
 		}
 
-		dispatch(__updateMypageImg({ formData: formData, id: 1 }));
+		// dispatch(__updateMypageImg({ formData: formData, id: 1 }));
 	};
 
 	return (

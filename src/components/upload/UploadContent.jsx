@@ -66,7 +66,7 @@ function UploadContent() {
 			.post("http://3.38.153.4:8080/boards", formData, {
 				headers: {
 					Authorization: accessToken,
-					"Refresh-Token": refreshToken,
+					// "Refresh-Token": refreshToken,
 					"Content-Type": "multipart/form-data",
 				},
 			})
