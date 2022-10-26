@@ -15,9 +15,6 @@ const Sign = ({}) => {
 	const [pwInput1, setPwInput1] = useState();
 	const [pwInput2, setPwInput2] = useState();
 
-	const [idInputWrong, setIdInputWrong] = useState(false);
-	const [pwInputWrong, setPwInputWrong] = useState(false);
-
 	const dispatch = useDispatch();
 
 	const handleChange1 = e => {
@@ -44,35 +41,29 @@ const Sign = ({}) => {
 
 		if (pwInput1 === pwInput2) {
 			if (is_nickname(idInput) && is_password(pwInput1)) {
-				setIdInputWrong(false);
-				setPwInputWrong(false);
 				// { name: "jae12", password: "123asd4@" }
 
 				await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/signup`, {
 					name: idInput,
 					password: pwInput1,
 				});
-
+				console.log(1);
 				window.confirm("회원가입이 되었습니다!");
 				dispatch(__loginDB({ name: idInput, password: pwInput1 }));
 				navigate(`/`);
 				// dispatch(__loginDB({ name: "jae12", password: "123asd4@" }));
 			} else if (!is_nickname(idInput) && is_password(pwInput1)) {
-				setIdInputWrong(true);
-				setPwInputWrong(false);
+				console.log(2);
 				window.confirm(
 					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
 				);
 			} else if (is_nickname(idInput) && !is_password(pwInput1)) {
-				setIdInputWrong(false);
-				setPwInputWrong(true);
+				console.log(3);
 				window.confirm(
 					"비번이 이상합니다!  1. 영문, 숫자, 특수문자 !@#$%^&* 적어도 하나씩 포함해야됨 2. 8-20자 3. 특수문자만 사용할 수 없음"
 				);
 			} else {
-				setIdInputWrong(true);
-				setPwInputWrong(true);
-
+				console.log(4);
 				window.confirm(
 					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
 				);
@@ -88,24 +79,20 @@ const Sign = ({}) => {
 		// 1. axios로 아이디 보내기
 
 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/check-id`, {
-			name: "jae12345",
+			name: idInput,
 		});
-
-		// const yes = await fetch("/member/check-id", {
-		// 	method: "POST",
-		// 	body: "jae123",
-		// });
-
-		// 2. success 가 true, false 로
-		// 메세지 띄우기
-
-		console.log("checkOverlap");
+		window.confirm(`${response.data.data}`);
 	};
 
 	const handleCancel = e => {
 		// 1. state값 다 지우기
 
 		e.preventDefault();
+
+		setIdInput("");
+		setPwInput1("");
+		setPwInput2("");
+
 		console.log("handleCancel");
 	};
 
@@ -116,19 +103,24 @@ const Sign = ({}) => {
 					<IdDiv>
 						<IdInputDiv>
 							<IconImg src={person} />
-							<IdInput type="text" onChange={handleChange1} placeholder="아이디" />
+							<IdInput type="text" onChange={handleChange1} value={idInput} placeholder="아이디" />
 						</IdInputDiv>
 						<IdButton onClick={checkOverlap}>중복확인</IdButton>
 					</IdDiv>
 
 					<PwDiv>
 						<IconImg src={lock} />
-						<PwInput type="password" onChange={handleChange2} placeholder="비밀번호" />
+						<PwInput type="text" onChange={handleChange2} value={pwInput1} placeholder="비밀번호" />
 					</PwDiv>
 
 					<PwAgainDiv>
 						<IconImg src={lock} />
-						<PwAgainInput type="password" onChange={handleChange3} placeholder="비밀번호 재입력" />
+						<PwAgainInput
+							type="text"
+							onChange={handleChange3}
+							value={pwInput2}
+							placeholder="비밀번호 재입력"
+						/>
 					</PwAgainDiv>
 
 					<ButtonsDiv>

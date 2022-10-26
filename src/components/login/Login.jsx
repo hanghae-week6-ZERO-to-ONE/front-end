@@ -52,7 +52,7 @@ const Login = ({}) => {
 
 				<IdPasswordDiv>
 					<Input type="text" onChange={handleChange1} placeholder="아이디" />
-					<Input type="text" onChange={handleChange2} placeholder="비밀번호" />
+					<Input type="password" onChange={handleChange2} placeholder="비밀번호" />
 				</IdPasswordDiv>
 
 				<ButtonsDiv>
