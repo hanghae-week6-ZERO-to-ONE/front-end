@@ -13,7 +13,8 @@ export const __loginDB = createAsyncThunk("user/loginDB", async (data, thunkAPI)
 	try {
 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/member/login`, data);
 		if (response.data.success === false) {
-			// window.alert(response.data.error.message);
+			console.log(response.data.success);
+			window.alert(response.data.error.message);
 			return thunkAPI.rejectWithValue();
 		} else {
 			// header에 어떤값들이 또 들어있는지

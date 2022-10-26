@@ -36,10 +36,10 @@ const Router = () => {
 					<Route path="detail" element={<Detail />}>
 						<Route path=":id" element={<Detail />} />
 					</Route>
-					<Route path="" element={<PrivateRoute login={login} />}>
-						<Route path="my_page" element={<MyPage />} />
-						<Route path="upload" element={<Upload />} />
-					</Route>
+					{/* <Route path="" element={<PrivateRoute login={login} />}> */}
+					<Route path="my_page" element={<MyPage />} />
+					<Route path="upload" element={<Upload />} />
+					{/* </Route> */}
 
 					<Route path="sign" element={<SignPage />} />
 				</Route>
