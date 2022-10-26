@@ -2,7 +2,11 @@ import { Outlet } from "react-router-dom";
 import logo from "../images/logo.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { is_password } from "../common/logics";
+import Logout from "./login/Logout";
+import { useSelector } from "react-redux";
 const Header = () => {
+	const login = useSelector(state => state.login.isLogin);
 	return (
 		<>
 			<HeaderWrap>
@@ -15,7 +19,7 @@ const Header = () => {
 						안녕하세요 <span>누구누구</span>님
 					</p>
 					<StLink to={"my_page"}>마이 페이지</StLink>
-					<StLink to={"login"}>로그인</StLink>
+					{login ? <Logout /> : <StLink to={"login"}>로그인</StLink>}
 				</div>
 			</HeaderWrap>
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
@@ -9,9 +9,17 @@ const Login = ({}) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const login = useSelector(state => state.login.isLogin);
+
+	useEffect(() => {
+		if (login) {
+			navigate("/");
+		}
+	}, [login]);
+
 	const handleLogin = e => {
 		e.preventDefault();
-		dispatch(__loginDB({ name: "jae1234", password: "123asd4" }));
+		dispatch(__loginDB({ name: "jae12", password: "123asd4@" }));
 	};
 
 	const handleButton2 = e => {

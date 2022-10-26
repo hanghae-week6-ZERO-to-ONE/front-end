@@ -11,21 +11,23 @@ import SignPage from "../pages/sign/SignPage";
 import { useEffect, useState } from "react";
 
 import PrivateRoute from "./PrivateRoute";
+import { useSelector } from "react-redux";
+import { is_nickname, is_password } from "../common/logics";
 
 const Router = () => {
-	const [login, setLogin] = useState(false);
+	// const [login, setLogin] = useState(false);
+	// const isLogin = useSelector(state => state.login.isLogin);
+	// useEffect(() => {
+	// 	const token = localStorage.getItem("authorization");
 
-	useEffect(() => {
-		const token = localStorage.getItem("authorization");
-
-		if (token) {
-			console.log("loggedin");
-			setLogin(true);
-		} else {
-			console.log("loggedout");
-			setLogin(false);
-		}
-	}, []);
+	// 	if (token) {
+	// 		console.log("loggedin");
+	// 		setLogin(true);
+	// 	} else {
+	// 		console.log("loggedout");
+	// 		setLogin(false);
+	// 	}
+	// }, []);
 
 	return (
 		<BrowserRouter>
@@ -36,10 +38,10 @@ const Router = () => {
 					<Route path="detail" element={<Detail />}>
 						<Route path=":id" element={<Detail />} />
 					</Route>
-					{/* <Route path="" element={<PrivateRoute login={login} />}> */}
-					<Route path="my_page" element={<MyPage />} />
-					<Route path="upload" element={<Upload />} />
-					{/* </Route> */}
+					<Route path="" element={<PrivateRoute />}>
+						<Route path="my_page" element={<MyPage />} />
+						<Route path="upload" element={<Upload />} />
+					</Route>
 
 					<Route path="sign" element={<SignPage />} />
 				</Route>
