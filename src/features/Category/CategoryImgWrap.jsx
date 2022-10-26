@@ -2,27 +2,26 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const CategoryImgWrap = ({ board }) => {
-	console.log(board);
+const CategoryImgWrap = ({ boards }) => {
 	const navigate = useNavigate();
 	return (
 		<>
 			<Categoryli
 				onClick={() => {
-					navigate(`/detail/${board.id}`, {
+					navigate(`/detail/${boards.id}`, {
 						state: {
-							id: board.id,
-							category: board.category,
-							title: board.title,
-							content: board.content,
-							image: board.image,
-							heartNum: board.heartNum,
+							id: boards.id,
+							category: boards.category,
+							title: boards.title,
+							content: boards.content,
+							image: boards.image,
+							heartNum: boards.heartNum,
 						},
 					});
 				}}
 			>
-				<img src={board.image} alt={board.title} />
-				<p>{board.title}</p>
+				<img src={boards.image} alt={boards.title} />
+				<p>{boards.title}</p>
 			</Categoryli>
 		</>
 	);

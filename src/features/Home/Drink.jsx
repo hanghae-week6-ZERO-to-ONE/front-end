@@ -1,26 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-const Drink = ({ board }) => {
+const Drink = ({ boards }) => {
 	const navigate = useNavigate();
 
 	return (
 		<DrinkWrap
 			onClick={() => {
-				navigate(`/detail/${board.id}`, {
+				navigate(`/detail/${boards.id}`, {
 					state: {
-						id: board.id,
-						category: board.category,
-						title: board.title,
-						content: board.content,
-						image: board.image,
-						heartNum: board.heartNum,
+						id: boards.id,
+						category: boards.category,
+						title: boards.title,
+						content: boards.content,
+						image: boards.image,
+						heartNum: boards.heartNum,
 					},
 				});
 			}}
 		>
-			<img src={board.image} alt={board.title} />
-			<p>{board.title}</p>
+			<img src={boards.image} alt={boards.title} />
+			<p>{boards.title}</p>
 		</DrinkWrap>
 	);
 };

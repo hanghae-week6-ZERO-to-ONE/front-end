@@ -1,5 +1,5 @@
 {
-  "board": [
+  "boards": [
     {
       "id": 5,
       "title": "수정",
@@ -65,7 +65,7 @@
       "heartNum": 124
     }
   ],
-  "comments": [
+  "comment": [
     {
       "name": "국경훈",
       "content": "123ㅈㄷㄹ",
@@ -78,6 +78,34 @@
     {
       "content": "댓글",
       "id": 13
+    },
+    {
+      "content": "qwd",
+      "id": 14
+    },
+    {
+      "content": "ㅁㅈㅇ",
+      "id": 15
+    },
+    {
+      "content": "345",
+      "id": 16
+    },
+    {
+      "content": "345",
+      "id": 17
+    },
+    {
+      "content": "678",
+      "id": 18
+    },
+    {
+      "content": "345",
+      "id": 19
+    },
+    {
+      "content": "2345",
+      "id": 20
     }
   ]
 }

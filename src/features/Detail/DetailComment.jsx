@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DetailCommentContent from "../../features/Detail/DetailCommentContent";
 import { __getComment, __addComment } from "../../redux/modules/comment";
 
 const DetailComment = () => {
 	const dispatch = useDispatch();
-
-	const comments = useSelector(state => state.comment.comments);
-	// console.log(comment);
+	const id = useParams();
+	const comments = useSelector(state => state.comment.comment.data);
+	console.log(comments);
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
+
+	useEffect(() => {
+		dispatch(__getComment(id));
+	}, [dispatch, clicked]);
+	// console.log(comment);
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (inputForm) {
 			dispatch(
 				__addComment({
+					id: id,
 					content: inputForm,
 				})
 			);
@@ -25,9 +33,6 @@ const DetailComment = () => {
 		}
 		// navigate(`/detail/${id}`);
 	};
-	useEffect(() => {
-		dispatch(__getComment());
-	}, [dispatch, clicked]);
 
 	return (
 		<DetailCommentWrap>
@@ -46,7 +51,7 @@ const DetailComment = () => {
 					</button>
 				</div>
 			</CommentWriteWrap>
-			{comments &&
+			{/* {comments &&
 				comments?.map((com, idx) => {
 					return (
 						<DetailCommentContent
@@ -56,7 +61,7 @@ const DetailComment = () => {
 							key={idx}
 						/>
 					);
-				})}
+				})} */}
 		</DetailCommentWrap>
 	);
 };

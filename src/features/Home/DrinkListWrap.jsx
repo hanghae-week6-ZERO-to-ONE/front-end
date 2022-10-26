@@ -7,8 +7,8 @@ import Drink from "./Drink";
 
 const DrinkListWrap = () => {
 	const dispatch = useDispatch();
-	const board = useSelector(state => state.board.board);
-
+	const boards = useSelector(state => state.boards.boards.data);
+	console.log(boards);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
@@ -19,10 +19,10 @@ const DrinkListWrap = () => {
 				<article>
 					<h2>최신</h2>
 					<ul>
-						{board &&
-							board?.map(data => (
+						{boards &&
+							boards?.map(data => (
 								<>
-									<Drink key={data.id} board={data} />
+									<Drink key={data.id} boards={data} />
 								</>
 							))}
 					</ul>
@@ -36,12 +36,12 @@ const DrinkListWrap = () => {
 										<Link to={`/category/${category}`}>{category}</Link>
 									</h2>
 									<ul>
-										{board &&
-											board
+										{boards &&
+											boards
 												?.filter(data => data.category === `${category}`)
 												.map(data => (
 													<>
-														<Drink key={data.id} board={data} />
+														<Drink key={data.id} boards={data} />
 													</>
 												))}
 									</ul>

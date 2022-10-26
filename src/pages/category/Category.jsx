@@ -10,11 +10,11 @@ import { Link } from "react-router-dom";
 const Category = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
-	const board = useSelector(state => state.board.board);
+	const boards = useSelector(state => state.boards.boards.data);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
-	console.log(board);
+
 	return (
 		<>
 			<Layout>
@@ -25,12 +25,12 @@ const Category = () => {
 					</StLink>
 				</BtnWrap>
 				<CategoryUl>
-					{board &&
-						board
+					{boards &&
+						boards
 							?.filter(data => data.category === `${params.id}`)
 							.map(data => (
 								<>
-									<CategoryImgWrap key={data.id} board={data} />
+									<CategoryImgWrap key={data.id} boards={data} />
 								</>
 							))}
 				</CategoryUl>
@@ -100,6 +100,6 @@ const StLink = styled(Link)`
 const CategoryUl = styled.ul`
 	clear: both;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	flex-wrap: wrap;
 `;
