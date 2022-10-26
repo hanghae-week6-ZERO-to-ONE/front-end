@@ -33,7 +33,7 @@ function UserInfoImg() {
 	const submitHandler = e => {
 		e.preventDefault();
 
-		const accessToken = localStorage.getItem("accessToken");
+		const accessToken = localStorage.getItem("authorization");
 		// const refreshToken = localStorage.getItem("refreshToken");
 
 		const formData = new FormData();

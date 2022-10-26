@@ -41,8 +41,8 @@ function UploadContent() {
 	const onClickHandler = e => {
 		e.preventDefault();
 
-		const accessToken = localStorage.getItem("accessToken");
-		const refreshToken = localStorage.getItem("refreshToken");
+		const accessToken = localStorage.getItem("authorization");
+		// const refreshToken = localStorage.getItem("refreshToken");
 
 		const formData = new FormData();
 
