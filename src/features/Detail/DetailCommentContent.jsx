@@ -3,14 +3,13 @@ import styled from "styled-components";
 import userImage from "../../images/userImage.png";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+
 import { __deleteComment, __updateComment, __getComment } from "../../redux/modules/comment";
 const DetailCommentContent = ({ comments, setClicked, clicked }) => {
-	const { id } = useParams();
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [isEdit, setIsEdit] = useState(false);
 	const [editText, setEditText] = useState(comments.content);
+	const [username] = useState(comments.name);
 
 	useEffect(() => {
 		dispatch(__getComment());
@@ -20,7 +19,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 		setClicked(!clicked);
 	};
 	const editHandler = () => {
-		dispatch(__updateComment({ ...comments, content: editText }));
+		dispatch(__updateComment({ ...comments, content: editText, username: username }));
 		setIsEdit(!isEdit);
 		// navigate(`/detail/${id}`, {
 		// 	state: {
@@ -38,9 +37,27 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 					<CommentWrap>
 						<div>
 							<img src={userImage} alt="userImage" />
-							<span>{comments.username}</span>
+							<span>{comments.name}</span>
+						</div>
+						<div>
 							<input placeholder="댓글입력" type="text" value={editText} onChange={edit} />
 							<button onClick={editHandler}>수정완료</button>
+							<button onClick={() => setIsEdit(!isEdit)}>이전</button>
+						</div>
+					</CommentWrap>
+				</>
+			) : (
+				<CommentWrap>
+					<div>
+						<img src={userImage} alt="userImage" />
+						<span>{comments.name}</span>
+					</div>
+					<div>
+						<Content>{comments.content}</Content>
+					</div>
+					<div>
+						<ButtonWrap>
+							<button onClick={() => setIsEdit(!isEdit)}>수정</button>
 							<button
 								onClick={() => {
 									const result = window.confirm("댓글을 지울까요?");
@@ -51,32 +68,9 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 									}
 								}}
 							>
-								이전
+								삭제
 							</button>
-						</div>
-					</CommentWrap>
-				</>
-			) : (
-				<CommentWrap>
-					<div>
-						<img src={userImage} alt="userImage" />
-						<span>{comments.username}</span>
-						<span>{comments.content}</span>
-					</div>
-					<div>
-						<button onClick={() => setIsEdit(!isEdit)}>수정</button>
-						<button
-							onClick={() => {
-								const result = window.confirm("댓글을 지울까요?");
-								if (result) {
-									return onDeleteHandler();
-								} else {
-									return;
-								}
-							}}
-						>
-							삭제
-						</button>
+						</ButtonWrap>
 					</div>
 				</CommentWrap>
 			)}
@@ -108,8 +102,9 @@ const CommentWrap = styled.article`
 		margin-right: 10px;
 		cursor: pointer;
 	}
-	div:first-child {
+	div {
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
 		margin-left: 20px;
 		img {
@@ -120,7 +115,11 @@ const CommentWrap = styled.article`
 		}
 	}
 	input {
-		width: 800px;
+		width: 750px;
 		margin-right: 8px;
 	}
+`;
+const ButtonWrap = styled.div``;
+const Content = styled.span`
+	width: 700px;
 `;

@@ -20,7 +20,9 @@ const Category = () => {
 			<Layout>
 				<CategoryExplanation category={params.id} />
 				<BtnWrap>
-					<StLink to="/upload">업로드</StLink>
+					<StLink to="/upload">
+						<strong>업로드</strong>
+					</StLink>
 				</BtnWrap>
 				<CategoryUl>
 					{board &&
@@ -57,6 +59,42 @@ const StLink = styled(Link)`
 	line-height: 40px;
 	color: #222;
 	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	strong {
+		display: block;
+	}
+	:hover strong {
+		animation: moveTextUp 0.3s, moveDownUp 0.3s 0.3s;
+	}
+	@keyframes moveTextUp {
+		to {
+			transform: translateY(-100%);
+		}
+	}
+
+	@keyframes moveDownUp {
+		from {
+			transform: translateY(100%);
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+	::before {
+		content: "";
+		display: block;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 100%;
+		transition: 0.3s;
+		transform-origin: 100% 0;
+	}
+	:hover::before {
+		left: 0;
+	}
 `;
 
 const CategoryUl = styled.ul`

@@ -11,6 +11,9 @@ const Header = () => {
 				</Link>
 
 				<div>
+					<p>
+						안녕하세요 <span>누구누구</span>님
+					</p>
 					<StLink to={"my_page"}>마이 페이지</StLink>
 					<StLink to={"login"}>로그인</StLink>
 				</div>
@@ -28,6 +31,23 @@ const HeaderWrap = styled.header`
 	align-items: center;
 	width: 1280px;
 	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	p {
+		margin-bottom: 10px;
+		span {
+			font-size: 20px;
+		}
+	}
+	::after {
+		content: "";
+		width: 1920px;
+		height: 1px;
+		position: absolute;
+		left: -320px;
+		bottom: 0;
+		background-color: #bbbbbb;
+	}
 `;
 
 const StLink = styled(Link)`

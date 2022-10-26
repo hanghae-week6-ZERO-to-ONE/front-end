@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const CategoryImgWrap = ({ board }) => {
+	console.log(board);
 	const navigate = useNavigate();
 	return (
 		<>
@@ -15,6 +16,7 @@ const CategoryImgWrap = ({ board }) => {
 							title: board.title,
 							content: board.content,
 							image: board.image,
+							heartNum: board.heartNum,
 						},
 					});
 				}}

@@ -81,7 +81,13 @@ const Detail = () => {
 										<Content>{content}</Content>
 									</div>
 									<EditDelete>
-										<span>{<button onClick={() => setIsEdit(!isEdit)}>편집</button>}</span>
+										<span>
+											{
+												<button onClick={() => setIsEdit(!isEdit)}>
+													<strong>편집</strong>
+												</button>
+											}
+										</span>
 										<span>
 											<button
 												onClick={() => {
@@ -93,7 +99,7 @@ const Detail = () => {
 													}
 												}}
 											>
-												삭제
+												<strong>삭제</strong>
 											</button>
 										</span>
 									</EditDelete>
@@ -104,7 +110,9 @@ const Detail = () => {
 										<div>
 											<input type="text" onChange={titleHandler} value={editTitle} />
 											<input type="text" onChange={contentHandler} value={editContent} />
-											<button onClick={editHandler}>수정</button>
+											<button onClick={editHandler}>
+												<strong>수정</strong>
+											</button>
 										</div>
 										<span>
 											<button
@@ -173,6 +181,7 @@ const EditDelete = styled.div`
 		line-height: 20px;
 		cursor: pointer;
 	}
+
 	span {
 		margin-right: 20px;
 	}

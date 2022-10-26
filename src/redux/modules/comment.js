@@ -110,8 +110,6 @@ export const commentSlice = createSlice({
 		},
 		[__updateComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			console.log(current(state.comments));
-			console.log(action.payload);
 			state.comments = updateCommentLogic(state.comments, action.payload);
 		},
 		[__updateComment.rejected]: (state, action) => {

@@ -41,7 +41,9 @@ const DetailComment = () => {
 						value={inputForm || ""}
 						onChange={e => setInputForm(e.target.value)}
 					/>
-					<button onClick={handleSubmit}>작성</button>
+					<button onClick={handleSubmit}>
+						<strong>작성</strong>
+					</button>
 				</div>
 			</CommentWriteWrap>
 			{comments &&
