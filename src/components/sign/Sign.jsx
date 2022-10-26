@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import person from "../../images/sign/person.svg";
 import lock from "../../images/sign/lock.svg";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { is_nickname, is_password } from "../../common/logics";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __loginDB } from "../../redux/modules/login";
 
 const Sign = ({}) => {
+	const login = useSelector(state => state.login.isLogin);
+
 	const navigate = useNavigate();
 
 	const [idInput, setIdInput] = useState();
@@ -47,23 +49,20 @@ const Sign = ({}) => {
 					name: idInput,
 					password: pwInput1,
 				});
-				console.log(1);
+
 				window.confirm("회원가입이 되었습니다!");
 				dispatch(__loginDB({ name: idInput, password: pwInput1 }));
 				navigate(`/`);
 				// dispatch(__loginDB({ name: "jae12", password: "123asd4@" }));
 			} else if (!is_nickname(idInput) && is_password(pwInput1)) {
-				console.log(2);
 				window.confirm(
 					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
 				);
 			} else if (is_nickname(idInput) && !is_password(pwInput1)) {
-				console.log(3);
 				window.confirm(
 					"비번이 이상합니다!  1. 영문, 숫자, 특수문자 !@#$%^&* 적어도 하나씩 포함해야됨 2. 8-20자 3. 특수문자만 사용할 수 없음"
 				);
 			} else {
-				console.log(4);
 				window.confirm(
 					"닉네임이 이상합니다!  1. 2-10자 2. 영문, 숫자를 조합해서 만듬 (한글안됨) 3. 영문만 사용할 수 있음	4. 숫자만 사용해서는 안됨 5. 특수문자 (_-) 이 두가지 사용 가능, 특수문자만 사용하면 안됨"
 				);
@@ -92,9 +91,11 @@ const Sign = ({}) => {
 		setIdInput("");
 		setPwInput1("");
 		setPwInput2("");
-
-		console.log("handleCancel");
 	};
+
+	if (login) {
+		return <Navigate to="/" replace={true} />;
+	}
 
 	return (
 		<>
