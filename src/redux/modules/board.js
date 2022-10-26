@@ -17,21 +17,21 @@ export const __getBoard = createAsyncThunk("getBoard", async (payload, thunkAPI)
 	}
 });
 
-export const __getBoardCategory = createAsyncThunk(
-	"getBoardCategory",
-	async (payload, thunkAPI) => {
-		try {
-			const data = await axios.get(
-				"http://3.38.153.4:8080/boards/recent-categories?category=",
-				payload
-			);
+// export const __getBoardCategory = createAsyncThunk(
+// 	"getBoardCategory",
+// 	async (payload, thunkAPI) => {
+// 		try {
+// 			const data = await axios.get(
+// 				"http://3.38.153.4:8080/boards/recent-categories?category=",
+// 				payload
+// 			);
 
-			return thunkAPI.fulfillWithValue(data.data.data);
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
-		}
-	}
-);
+// 			return thunkAPI.fulfillWithValue(data.data.data);
+// 		} catch (error) {
+// 			return thunkAPI.rejectWithValue(error);
+// 		}
+// 	}
+// );
 
 export const __getBoardDelete = createAsyncThunk("getBoardDelete", async (payload, thunkAPI) => {
 	try {
@@ -78,24 +78,23 @@ export const boardSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 		},
-		[__getBoardCategory.pending]: state => {
-			state.isLoading = true;
-		},
-		[__getBoardCategory.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.boards = action.payload;
-		},
-		[__getBoardCategory.rejected]: (state, action) => {
-			state.isLoading = false;
-			state.error = action.payload;
-		},
+		// [__getBoardCategory.pending]: state => {
+		// 	state.isLoading = true;
+		// },
+		// [__getBoardCategory.fulfilled]: (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.boards = action.payload;
+		// },
+		// [__getBoardCategory.rejected]: (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.error = action.payload;
+		// },
 
 		[__getBoardDelete.pending]: state => {
 			state.isLoading = true;
 		},
 
 		[__getBoardDelete.fulfilled]: (state, action) => {
-			console.log(state.boards);
 			state.boards = state.boards.filter(list => list.id !== action.payload);
 		},
 		[__getBoardDelete.rejected]: (state, action) => {

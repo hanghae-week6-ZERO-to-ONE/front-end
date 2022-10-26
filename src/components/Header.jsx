@@ -7,6 +7,8 @@ import Logout from "./login/Logout";
 import { useSelector } from "react-redux";
 const Header = () => {
 	const login = useSelector(state => state.login.isLogin);
+	const loginName = useSelector(state => state.login);
+	console.log(loginName);
 	return (
 		<>
 			<HeaderWrap>
@@ -16,7 +18,8 @@ const Header = () => {
 
 				<div>
 					<p>
-						안녕하세요 <span>누구누구</span>님
+						안녕하세요
+						{login ? <span>회원님</span> : <span>GUEST님</span>}
 					</p>
 					<StLink to={"my_page"}>마이 페이지</StLink>
 					{login ? <Logout /> : <StLink to={"login"}>로그인</StLink>}
