@@ -1,10 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const accessToken = localStorage.getItem("authorization");
 
 export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thunkAPI) => {
 	try {
-		const { data } = await axios.post(`http://3.38.153.4:8080/${payload.id.id}/comments`, payload);
-		return thunkAPI.fulfillWithValue(data);
+		const { data } = await axios.post(`http://3.38.153.4:8080/${payload.id.id}/comments`, payload, {
+			headers: {
+				Authorization: accessToken,
+				"Content-Type": "application/json",
+			},
+		});
+
+		return thunkAPI.fulfillWithValue(data.data.data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
 	}
@@ -13,6 +20,7 @@ export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thun
 export const __getComment = createAsyncThunk("GET_COMMENT", async (payload, thunkAPI) => {
 	try {
 		const data = await axios.get(`http://3.38.153.4:8080/boards/${payload.id}`, payload);
+
 		return thunkAPI.fulfillWithValue(data.data.data.commentResponseDtoList);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -21,7 +29,12 @@ export const __getComment = createAsyncThunk("GET_COMMENT", async (payload, thun
 
 export const __deleteComment = createAsyncThunk("DELETE_COMMENT", async (payload, thunkAPI) => {
 	try {
-		const { data } = await axios.delete(`http://3.38.153.4:8080/comments/${payload}`);
+		const { data } = await axios.delete(`http://3.38.153.4:8080/comments/${payload}`, {
+			headers: {
+				Authorization: accessToken,
+				"Content-Type": "application/json",
+			},
+		});
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -30,7 +43,12 @@ export const __deleteComment = createAsyncThunk("DELETE_COMMENT", async (payload
 
 export const __updateComment = createAsyncThunk("UPDATE_COMMENT", async (payload, thunkAPI) => {
 	try {
-		const { data } = await axios.put(`http://3.38.153.4:8080/comments/${payload.id}`, payload);
+		const { data } = await axios.put(`http://3.38.153.4:8080/comments/${payload.id}`, payload, {
+			headers: {
+				Authorization: accessToken,
+				"Content-Type": "application/json",
+			},
+		});
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
 		return thunkAPI.rejectWithValue(e.code);
@@ -67,7 +85,7 @@ export const commentSlice = createSlice({
 		},
 		[__addComment.fulfilled]: (state, action) => {
 			state.isLoading = false;
-			state.comment.comments = action.payload;
+			state.comment = action.payload;
 		},
 		[__addComment.rejected]: (state, action) => {
 			state.isLoading = false;

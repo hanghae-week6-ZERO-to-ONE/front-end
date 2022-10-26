@@ -9,7 +9,7 @@ const DetailComment = () => {
 	const dispatch = useDispatch();
 	const id = useParams();
 	const comments = useSelector(state => state.comment.comment);
-	// console.log(comments);
+
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
 
