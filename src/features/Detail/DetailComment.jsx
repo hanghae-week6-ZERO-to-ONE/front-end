@@ -7,24 +7,30 @@ import { __getComment, __addComment } from "../../redux/modules/comment";
 
 const DetailComment = () => {
 	const dispatch = useDispatch();
-	const id = useParams();
+	const { id } = useParams();
 	const comments = useSelector(state => state.comment.comment);
 
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
+	const [toggle, setToggle] = useState(false);
 
 	useEffect(() => {
 		dispatch(__getComment(id));
-	}, [dispatch]);
+	}, [dispatch, toggle]);
 
 	const handleSubmit = e => {
 		e.preventDefault();
+
 		if (inputForm) {
+			// console.log(inputForm);
+
 			dispatch(
 				__addComment({
 					content: inputForm,
+					id: id,
 				})
 			);
+			setToggle(!toggle);
 			setInputForm("");
 		} else {
 			alert("내용을 입력해주세요");

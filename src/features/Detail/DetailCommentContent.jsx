@@ -11,7 +11,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [editText, setEditText] = useState(comments.content);
 	const [writer] = useState(comments.writer);
-	const id = useParams();
+	const { id } = useParams();
 
 	useEffect(() => {
 		dispatch(__getComment(id));
