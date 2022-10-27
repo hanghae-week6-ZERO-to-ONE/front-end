@@ -11,7 +11,7 @@ const Category = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 	const boards = useSelector(state => state.boards.boards);
-
+	console.log(boards);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);
