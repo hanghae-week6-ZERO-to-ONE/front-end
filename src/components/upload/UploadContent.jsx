@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import userBasic from "../../images/userbasic.png";
 import { fileUploadApi } from "../../axios";
 import { __addTodos } from "../../redux/modules/_todoSlice";
 
@@ -93,37 +95,59 @@ function UploadContent() {
 	return (
 		<>
 			<Wrap onSubmit={onClickHandler}>
-				<ImageLayout>
-					<ImageLabel htmlFor="file" />
-					<ImageInput
-						placeholder="업로드"
-						id="file"
-						type={"file"}
-						accept={"image/*"}
-						onChange={fileUpload}
-					/>
-					<ImagePreview src={uploadpreview} />
-				</ImageLayout>
-
 				<ContentWrap>게시글 업로드</ContentWrap>
-				<ContentWrap2>
-					<input type="text" name="title" onChange={onChangeHandler} placeholder="제목" />
-				</ContentWrap2>
-				<ContentWrap2>
-					<select name="category" id="category" onChange={onChangeHandler}>
-						<option value="카테고리" disabled>
-							카테고리
-						</option>
-						<option value="프로틴음료">프로틴음료</option>
-						<option value="제로슈가">제로슈가</option>
-						<option value="건강음료">건강음료</option>
-						<option value="이온음료">이온음료</option>
-					</select>
-				</ContentWrap2>
-				<ContentWrap2>
-					<input type="text" name="content" onChange={onChangeHandler} placeholder="설명" />
-				</ContentWrap2>
-				<button type={"submit"}>업로드</button>
+				<Content>
+					<PhotoWrap>
+						<PhotoTitle>사진 업로드</PhotoTitle>
+						<ImageLayout>
+							<ImageLabel htmlFor="file" />
+							<ImageInput
+								placeholder="업로드"
+								id="file"
+								type={"file"}
+								accept={"image/*"}
+								onChange={fileUpload}
+							/>
+							<ImagePreview src={userBasic} />
+						</ImageLayout>
+						<StLink to={"/"}>Home</StLink>
+					</PhotoWrap>
+					<ContentRight>
+						<div>
+							<ContentWrap2>
+								<p>제목</p>
+							</ContentWrap2>
+							<input
+								type="text"
+								name="title"
+								onChange={onChangeHandler}
+								placeholder="제목을 입력해주세요"
+							/>
+						</div>
+						<div>
+							<ContentWrap2>카테고리</ContentWrap2>
+							<select name="category" id="category" onChange={onChangeHandler}>
+								<option value="카테고리" disabled>
+									카테고리
+								</option>
+								<option value="프로틴음료">프로틴음료</option>
+								<option value="제로슈가">제로슈가</option>
+								<option value="건강음료">건강음료</option>
+								<option value="이온음료">이온음료</option>
+							</select>
+						</div>
+						<div>
+							<ContentWrap2>설명</ContentWrap2>
+							<input
+								type="text"
+								name="content"
+								onChange={onChangeHandler}
+								placeholder="내용을 입력해주세요"
+							/>
+						</div>
+						<SubmitBtn type={"submit"}>등록하기</SubmitBtn>
+					</ContentRight>
+				</Content>
 			</Wrap>
 		</>
 	);
@@ -135,35 +159,84 @@ const Wrap = styled.form`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-direction: column;
 	width: 1280px;
 	margin: 0 auto;
+	gap: 20px;
+`;
+
+const PhotoWrap = styled.div`
+	height: 63px;
+
+	p {
+		box-sizing: border-box;
+		width: 300px;
+		border: 3px solid #cde230;
+	}
+`;
+const PhotoTitle = styled.p`
+	text-align: center;
+	line-height: 63px;
 `;
 
 const ContentWrap = styled.div`
 	width: 1280px;
 	height: 83px;
-	left: 320px;
-	top: 270px;
-
 	background: #ffffff;
 	border: 3px solid #cde230;
+	text-align: center;
+	line-height: 83px;
+	font-size: 30px;
+	font-weight: 700;
+`;
+
+const Content = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 1280px;
+	height: 83px;
+`;
+const ContentRight = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 900px;
+	gap: 20px;
+	div {
+		display: flex;
+		align-content: center;
+		flex-direction: row;
+		gap: 10px;
+	}
+	input {
+		border: 3px solid #cde230;
+		display: block;
+		width: 600px;
+	}
+	select {
+		border: 3px solid #cde230;
+		display: block;
+		width: 600px;
+		cursor: pointer;
+	}
 `;
 
 const ContentWrap2 = styled.div`
 	width: 353px;
-	height: 57px;
-	left: 320px;
-	top: 387px;
-
+	height: 63px;
 	background: #ffffff;
 	border: 3px solid #cde230;
+	align-items: center;
+	justify-content: center;
 `;
 
 const ImageLayout = styled.div`
+	margin-top: 20px;
+	margin-bottom: 20px;
 	position: relative;
-	height: 100px;
-	width: 100px;
-	border-radius: 50px;
+	height: 200px;
+	width: 300px;
+	box-sizing: border-box;
+
 	/* overflow: hidden; */
 `;
 
@@ -174,19 +247,46 @@ const ImagePreview = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-
-	background-color: gray;
+	border: 3px solid #cde230;
+	box-sizing: border-box;
+	background-color: #fff;
 `;
 
 const ImageLabel = styled.label`
-	posistion: absolute;
+	position: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 1;
-
 	background-color: transparent;
+	cursor: pointer;
 `;
 
-const ImageInput = styled.input``;
+const ImageInput = styled.input`
+	visibility: hidden;
+`;
+
+const SubmitBtn = styled.button`
+	display: block;
+	background: #fff;
+	border: 3px solid #cde230;
+	cursor: pointer;
+	transition: all 0.5s;
+	:hover {
+		background: #cde230;
+		border: 3px solid transparent;
+	}
+`;
+
+const StLink = styled(Link)`
+	text-align: center;
+	color: #232323;
+	display: block;
+	width: 80px;
+	border: 3px solid #cde230;
+	:hover {
+		background: #cde230;
+		border: 3px solid transparent;
+	}
+`;
