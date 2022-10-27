@@ -111,13 +111,18 @@ const Sign = ({}) => {
 
 					<PwDiv>
 						<IconImg src={lock} />
-						<PwInput type="text" onChange={handleChange2} value={pwInput1} placeholder="비밀번호" />
+						<PwInput
+							type="password"
+							onChange={handleChange2}
+							value={pwInput1}
+							placeholder="비밀번호"
+						/>
 					</PwDiv>
 
 					<PwAgainDiv>
 						<IconImg src={lock} />
 						<PwAgainInput
-							type="text"
+							type="password"
 							onChange={handleChange3}
 							value={pwInput2}
 							placeholder="비밀번호 재입력"
