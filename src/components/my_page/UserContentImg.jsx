@@ -9,7 +9,7 @@ function UserContentImg({ boards }) {
 			</ImgWrap>
 			<TextWrap>
 				<div>{boards.title}</div>
-				<div>{boards.title}</div>
+				<div>{boards.comment}</div>
 				<div>❤좋아요 {boards.id}개</div>
 			</TextWrap>
 		</>

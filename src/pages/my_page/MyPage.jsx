@@ -1,6 +1,7 @@
 import Layout from "../../components/Layout";
-import UserInfo from "../../components/my_page/UserInfo";
+import UserInfoImg from "../../components/my_page/UserInfoImg";
 import UserContent from "../../components/my_page/UserContent";
+import UserContentImg from "../../components/my_page/UserContentImg";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const Mypage = () => {
 		<>
 			{/* <Background /> */}
 			<Layout>
-				<UserInfo />
+				<UserInfoImg />
 				<UserContent />
 			</Layout>
 		</>

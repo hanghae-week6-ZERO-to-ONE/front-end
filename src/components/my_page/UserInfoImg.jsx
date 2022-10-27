@@ -68,9 +68,8 @@ function UserInfoImg() {
 		<>
 			<ImgWrap onSubmit={submitHandler}>
 				{/* <img src={mask} alt="mask" /> */}
-				<ImageLayout>
+				<PhotoWrap>
 					<ImageLabel htmlFor="file" style={{ display: "none" }} ref={selectFile} />
-
 					<ImageInput
 						placeholder="업로드"
 						id="file"
@@ -78,9 +77,8 @@ function UserInfoImg() {
 						accept={"image/*"}
 						onChange={fileUpload}
 					/>
-
 					<ImagePreview src={editpreview} />
-				</ImageLayout>
+				</PhotoWrap>
 				<button type="submit">프로필 사진 수정</button>
 			</ImgWrap>
 		</>
@@ -98,7 +96,7 @@ const UserName = styled.p`
 	font-size: 20px;
 `;
 
-const ImageLayout = styled.div`
+const PhotoWrap = styled.div`
 	position: relative;
 	height: 100px;
 	width: 100px;
