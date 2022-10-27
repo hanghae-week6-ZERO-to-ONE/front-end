@@ -7,8 +7,7 @@ import Logout from "./login/Logout";
 import { useSelector } from "react-redux";
 const Header = () => {
 	const login = useSelector(state => state.login.isLogin);
-	const loginName = useSelector(state => state.login);
-	console.log(loginName);
+
 	return (
 		<>
 			<HeaderWrap>

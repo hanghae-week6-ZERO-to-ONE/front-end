@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getBoard, __getBoardCategory } from "../../redux/modules/board";
-import { Link } from "react-router-dom";
+import { __getBoard, __getBoardCategory, __getBoardDetail } from "../../redux/modules/board";
+import { Link, useParams } from "react-router-dom";
 import Drink from "./Drink";
 
 const DrinkListWrap = () => {
+	const { id } = useParams();
 	const dispatch = useDispatch();
 	const boards = useSelector(state => state.boards.boards);
-	// const boards_category = useSelector(state => state.boards);
-	// console.log(boards);
+	console.log(boards);
 	useEffect(() => {
 		dispatch(__getBoard());
 	}, [dispatch]);

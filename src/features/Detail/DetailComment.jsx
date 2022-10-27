@@ -9,27 +9,20 @@ const DetailComment = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const comments = useSelector(state => state.comment.comment);
-
 	const [inputForm, setInputForm] = useState("");
 	const [clicked, setClicked] = useState(false);
 	const [toggle, setToggle] = useState(false);
 
-	useEffect(() => {
-		dispatch(__getComment(id));
-	}, [dispatch, toggle]);
-
 	const handleSubmit = e => {
 		e.preventDefault();
-
 		if (inputForm) {
-			// console.log(inputForm);
-
 			dispatch(
 				__addComment({
 					content: inputForm,
 					id: id,
 				})
 			);
+			dispatch(__getComment(id));
 			setToggle(!toggle);
 			setInputForm("");
 		} else {
@@ -37,6 +30,10 @@ const DetailComment = () => {
 		}
 		// navigate(`/detail/${id}`);
 	};
+
+	useEffect(() => {
+		dispatch(__getComment(id));
+	}, [dispatch, id]);
 
 	return (
 		<DetailCommentWrap>

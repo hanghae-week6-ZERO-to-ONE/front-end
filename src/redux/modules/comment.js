@@ -35,9 +35,7 @@ export const __getComment = createAsyncThunk("GET_COMMENT", async (payload, thun
 });
 
 export const __deleteComment = createAsyncThunk("DELETE_COMMENT", async (payload, thunkAPI) => {
-	console.log("1" + payload);
 	try {
-		console.log("2" + payload);
 		const { data } = await axios.delete(`http://3.38.153.4:8080/comments/${payload}`, {
 			headers: {
 				Authorization: accessToken,
@@ -47,7 +45,6 @@ export const __deleteComment = createAsyncThunk("DELETE_COMMENT", async (payload
 		// console.log(data);
 		return thunkAPI.fulfillWithValue(data);
 	} catch (e) {
-		console.log("3");
 		return thunkAPI.rejectWithValue(e.code);
 	}
 });

@@ -15,7 +15,7 @@ const DetailCommentContent = ({ comments, setClicked, clicked }) => {
 
 	useEffect(() => {
 		dispatch(__getComment(id));
-	}, [dispatch]);
+	}, [dispatch, id]);
 
 	const onDeleteHandler = () => {
 		dispatch(__deleteComment(comments.id));
