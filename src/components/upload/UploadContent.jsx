@@ -5,8 +5,6 @@ import styled from "styled-components";
 import { fileUploadApi } from "../../axios";
 import { __addTodos } from "../../redux/modules/_todoSlice";
 
-const DATA_URL = "http://15.164.234.179/";
-
 function UploadContent() {
 	const [imageToUpload, setImageToUpload] = useState(null);
 	const [uploadpreview, setUploadpreview] = useState(null);
@@ -62,6 +60,11 @@ function UploadContent() {
 		formData.append("category", data.category);
 		formData.append("content", data.content);
 
+		let entries = formData.entries();
+		for (const pair of entries) {
+			console.log(pair[0] + ", " + pair[1]);
+		}
+
 		axios
 			.post("http://3.38.153.4:8080/boards", formData, {
 				headers: {
@@ -79,10 +82,6 @@ function UploadContent() {
 			});
 
 		//formData는 콘솔에 찍히지 않아 이 방법으로 찍어야함
-		let entries = formData.entries();
-		for (const pair of entries) {
-			console.log(pair[0] + ", " + pair[1]);
-		}
 
 		// for (const value of formData.values()) {
 		// console.log("폼데이터:", value);

@@ -41,7 +41,7 @@ function UserInfoImg() {
 		// formData.append("title", data.username); //📌
 
 		axios
-			.put("http://3.38.153.4:8080/mypage/image", formData, {
+			.put("http://3.38.153.4:8080/mypage/images", formData, {
 				headers: {
 					Authorization: accessToken,
 					// "Refresh-Token": refreshToken,
@@ -57,8 +57,8 @@ function UserInfoImg() {
 			});
 
 		let entries = formData.entries();
-		for (const pair of entries) {
-			console.log(pair[0] + ", " + pair[1]);
+		for (const pairs of entries) {
+			console.log(pairs[0]);
 		}
 
 		// dispatch(__updateMypageImg({ formData: formData, id: 1 }));
