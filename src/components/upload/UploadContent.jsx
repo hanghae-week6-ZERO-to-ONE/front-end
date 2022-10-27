@@ -187,7 +187,7 @@ const ContentWrap = styled.div`
 	text-align: center;
 	line-height: 83px;
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 500;
 `;
 
 const Content = styled.div`
