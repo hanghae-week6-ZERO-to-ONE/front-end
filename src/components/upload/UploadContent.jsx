@@ -108,7 +108,7 @@ function UploadContent() {
 								accept={"image/*"}
 								onChange={fileUpload}
 							/>
-							<ImagePreview src={userBasic} />
+							<ImagePreview src={uploadpreview} />
 						</ImageLayout>
 						<StLink to={"/"}>Home</StLink>
 					</PhotoWrap>
