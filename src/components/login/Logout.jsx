@@ -26,4 +26,16 @@ const Logout = ({}) => {
 };
 export default Logout;
 
-const LogoutButton = styled.button``;
+const LogoutButton = styled.button`
+	border: none;
+	border: 1px solid #cde230;
+	background-color: #fff;
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	transition: all 0.5s;
+	:hover {
+		background-color: #cde230;
+	}
+`;

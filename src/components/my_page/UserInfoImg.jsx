@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { __updateMypageImg } from "../../redux/modules/mypage";
+import userBasic from "../../images/userbasic.png";
 // import Upload from "../pages/upload/Upload";
 
 function UserInfoImg() {
@@ -69,7 +70,7 @@ function UserInfoImg() {
 			<ImgWrap onSubmit={submitHandler}>
 				{/* <img src={mask} alt="mask" /> */}
 				<ImageLayout>
-					<ImageLabel htmlFor="file" style={{ display: "none" }} ref={selectFile} />
+					<ImageLabel htmlFor="file" ref={selectFile} />
 
 					<ImageInput
 						placeholder="업로드"
@@ -79,7 +80,7 @@ function UserInfoImg() {
 						onChange={fileUpload}
 					/>
 
-					<ImagePreview src={editpreview} />
+					<ImagePreview src={userBasic} />
 				</ImageLayout>
 				<button type="submit">프로필 사진 수정</button>
 			</ImgWrap>
@@ -89,7 +90,22 @@ function UserInfoImg() {
 
 export default UserInfoImg;
 
-const ImgWrap = styled.form``;
+const ImgWrap = styled.form`
+	button {
+		border: none;
+		border: 1px solid #cde230;
+		background-color: #fff;
+		width: 120px;
+		height: 30px;
+		line-height: 30px;
+		cursor: pointer;
+		margin-top: 20px;
+		transition: all 0.5s;
+		:hover {
+			background-color: #cde230;
+		}
+	}
+`;
 
 const UserName = styled.p`
 	width: 50%;
@@ -100,24 +116,25 @@ const UserName = styled.p`
 
 const ImageLayout = styled.div`
 	position: relative;
-	height: 100px;
-	width: 100px;
+	width: 230px;
+	height: 300px;
 	border-radius: 50px;
-	/* overflow: hidden; */
+	overflow: hidden;
 `;
 
 const ImageLabel = styled.label`
+	display: block;
 	position: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
 	width: 100%;
-	z-index: 1;
-
-	background-color: transparent;
+	z-index: 10;
 `;
 
-const ImageInput = styled.input``;
+const ImageInput = styled.input`
+	visibility: hidden;
+`;
 
 const ImagePreview = styled.img`
 	position: absolute;

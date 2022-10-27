@@ -44,14 +44,14 @@ const Header = () => {
 							<p>
 								{isLogin ? (
 									<span>
-										안녕하세요 <span>누구누구</span>님
+										안녕하세요 <span>jae12</span>님
 									</span>
 								) : (
 									<></>
 								)}
 							</p>
 							{isLogin ? <StLink to={"my_page"}>마이 페이지</StLink> : <></>}
-							{isLogin ? <Logout /> : <StLink to={"login"}>로그인 하기</StLink>}
+							{isLogin ? <Logout /> : <StLink to={"login"}>로그인</StLink>}
 						</div>
 					</HeaderWrap>
 

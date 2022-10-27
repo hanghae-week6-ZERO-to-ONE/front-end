@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const accessToken = localStorage.getItem("authorization");
 const initialState = {
-	board: [],
+	boards: [],
 	isLoading: false,
 	error: null,
 };
