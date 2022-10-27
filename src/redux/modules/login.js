@@ -16,12 +16,10 @@ export const __loginDB = createAsyncThunk("user/loginDB", async (data, thunkAPI)
 			window.alert(response.data.error.message);
 			return thunkAPI.rejectWithValue();
 		} else {
-			console.log("성공");
 			// header에 어떤값들이 또 들어있는지
 			localStorage.setItem("authorization", response.headers.authorization);
 			localStorage.setItem("refreshToken", response.headers.refreshtoken);
-
-			console.log(response.headers);
+			localStorage.setItem("isLogin", true);
 
 			return thunkAPI.fulfillWithValue(response.data);
 		}
@@ -34,7 +32,11 @@ export const __loginDB = createAsyncThunk("user/loginDB", async (data, thunkAPI)
 const loginSlice = createSlice({
 	name: "login",
 	initialState,
-	reducers: {},
+	reducers: {
+		handleLoginDispatch: (state, action) => {
+			state.isLogin = true;
+		},
+	},
 	extraReducers: {
 		[__loginDB.fulfilled]: (state, action) => {
 			state.isLogin = true;
@@ -47,3 +49,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
+export const loginAction = loginSlice.actions;

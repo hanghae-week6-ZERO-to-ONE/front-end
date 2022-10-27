@@ -4,33 +4,60 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { is_password } from "../common/logics";
 import Logout from "./login/Logout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
+import { loginAction } from "../redux/modules/login";
+
 const Header = () => {
-	const login = useSelector(state => state.login.isLogin);
-	console.log(login);
+	const isLogin = useSelector(state => state.login.isLogin);
+
+	const dispatch = useDispatch();
+
+	const { handleLoginDispatch } = loginAction;
+
+	const [ready, setReady] = useState(undefined);
+
+	const sample = () => {
+		const loggedin = localStorage.getItem("isLogin");
+		if (loggedin) {
+			dispatch(handleLoginDispatch());
+		}
+
+		setReady("yes");
+	};
+
+	useEffect(() => {
+		sample();
+	}, [isLogin]);
+
 	return (
 		<>
-			<HeaderWrap>
-				<Link to={"/"}>
-					<img src={logo} alt="logo" />
-				</Link>
+			{ready && (
+				<>
+					<HeaderWrap>
+						<Link to={"/"}>
+							<img src={logo} alt="logo" />
+						</Link>
 
-				<div>
-					<p>
-						{login ? (
+						<div>
 							<p>
-								안녕하세요 <span>누구누구</span>님
+								{isLogin ? (
+									<span>
+										안녕하세요 <span>누구누구</span>님
+									</span>
+								) : (
+									<></>
+								)}
 							</p>
-						) : (
-							<></>
-						)}
-					</p>
-					{login ? <StLink to={"my_page"}>마이 페이지</StLink> : <></>}
-					{login ? <Logout /> : <StLink to={"login"}>로그인 하기</StLink>}
-				</div>
-			</HeaderWrap>
+							{isLogin ? <StLink to={"my_page"}>마이 페이지</StLink> : <></>}
+							{isLogin ? <Logout /> : <StLink to={"login"}>로그인 하기</StLink>}
+						</div>
+					</HeaderWrap>
 
-			<Outlet></Outlet>
+					<Outlet></Outlet>
+				</>
+			)}
 		</>
 	);
 };
